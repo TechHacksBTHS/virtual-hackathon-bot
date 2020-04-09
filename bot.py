@@ -1,6 +1,5 @@
 # bot.py
 import os
-from boto.s3.connection import S3Connection
 
 import discord, random
 from dotenv import load_dotenv
@@ -25,7 +24,7 @@ async def create_team(ctx, role):
     try:
         await user.add_roles(role)
     except discord.errors.Forbidden:
-        ctx.message('Sorry, I can\'t let you do that. The execs are a far greater power than I, and I worship them as '
+        ctx.channel.send('Sorry, I can\'t let you do that. The execs are a far greater power than I, and I worship them as '
                     'gods')
 
 
@@ -34,7 +33,11 @@ async def create_team(ctx, role):
     guild = ctx.guild
     role = discord.utils.get(guild.roles, name=role)
     user = ctx.message.author
-    await user.add_roles(role)
+    try:
+        await user.add_roles(role)
+    except discord.ext.commands.errors:
+        ctx.channel.send('Sorry, I can\'t let you do that. The execs are a far greater power than I, and I worship them as '
+                    'gods')
 
 
 @bot.command(name='kick', pass_context=True,)
