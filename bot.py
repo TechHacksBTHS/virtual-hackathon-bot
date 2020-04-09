@@ -14,6 +14,10 @@ TOKEN = os.environ.get('TOKEN',3)
 
 client = discord.Client()
 
+@bot.event
+async def on_ready(ctx):
+    await ctx.send_message(bot.get_channel(697537529737510932),'I\'m finally awake uwu')
+
 
 @bot.command(name='create-team')
 async def create_team(ctx, role):
