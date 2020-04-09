@@ -13,10 +13,12 @@ bot = commands.Bot(command_prefix='!', description='owo i sure do L-O-V-E progra
 TOKEN = os.environ.get('TOKEN',3)
 
 client = discord.Client()
+bot_channel = bot.get_channel(697537529737510932)
+
 
 @bot.event
-async def on_ready(ctx):
-    await ctx.send_message(bot.get_channel(697537529737510932),'I\'m finally awake uwu')
+async def on_ready():
+    await bot_channel.send('I\'m finally awake uwu')
 
 
 @bot.command(name='create-team')
