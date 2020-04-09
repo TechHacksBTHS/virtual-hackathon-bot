@@ -1,5 +1,6 @@
 # bot.py
 import os
+from boto.s3.connection import S3Connection
 
 import discord, random
 from dotenv import load_dotenv
@@ -10,6 +11,7 @@ from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
 
 bot = commands.Bot(command_prefix='!', description='owo i sure do L-O-V-E programming')
+TOKEN = S3Connection(os.environ['TOKEN'], os.environ['TOKEN'])
 
 client = discord.Client()
 
