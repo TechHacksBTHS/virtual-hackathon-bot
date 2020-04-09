@@ -11,7 +11,7 @@ from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
 
 bot = commands.Bot(command_prefix='!', description='owo i sure do L-O-V-E programming')
-TOKEN = S3Connection(os.environ['TOKEN'], os.environ['TOKEN'])
+TOKEN = os.environ.get('TOKEN',3)
 
 client = discord.Client()
 
