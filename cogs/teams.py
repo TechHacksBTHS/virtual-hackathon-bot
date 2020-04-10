@@ -1,3 +1,4 @@
+#teams.py
 import discord, random,time
 from discord.ext import commands
 

@@ -1,15 +1,28 @@
 # bot.py
 import os
+from firebase import firebase
 
 import discord, random
 from dotenv import load_dotenv
 from discord import Member
 
+
 load_dotenv()
 from discord.ext import commands
 
+
+data = {
+    "USER":'username',
+    'TEAM':'team',
+
+}
+
 bot = commands.Bot(command_prefix='!', description='owo i sure do L-O-V-E programming')
 TOKEN = os.environ.get('TOKEN', 3)
+FIREBASE = os.environ.get('FIREBASE', 3)
+FIREBASE_NAME = os.environ.get('FIREBASE_NAME', 3)
+
+firebase = firebase.FirebaseApplication(FIREBASE, None)
 
 @bot.event
 async def on_ready():
@@ -20,6 +33,16 @@ async def on_ready():
     print('bot.py is active')
 
 
+
+@bot.command(name='ping')
+async def ping(ctx):
+    data = {
+        "USER": 'pong',
+        'TEAM': 'ping',
+    }
+    result = firebase.post(FIREBASE_NAME+'/Team', data)
+    print(result)
+    await ctx.send('pong')
 
 @bot.event
 async def on_member_join(member):
@@ -55,5 +78,7 @@ async def reload(ctx):
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
+
+
 
 bot.run(TOKEN)
