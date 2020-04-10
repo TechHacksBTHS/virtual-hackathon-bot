@@ -22,7 +22,7 @@ TOKEN = os.environ.get('TOKEN', 3)
 FIREBASE = os.environ.get('FIREBASE', 3)
 FIREBASE_NAME = os.environ.get('FIREBASE_NAME', 3)
 
-firebase = firebase.FirebaseApplication('https://techhacks-bot.firebaseio.com/', None)
+firebase = firebase.FirebaseApplication(FIREBASE, None)
 
 @bot.event
 async def on_ready():

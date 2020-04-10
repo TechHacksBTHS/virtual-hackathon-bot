@@ -54,15 +54,19 @@ class Teams(commands.Cog):
     async def create(self, ctx, *, role):
         guild = ctx.guild
         new_col = random.choice(Colors)
-        await guild.create_role(name=role, color=new_col)
-        role = discord.utils.get(ctx.guild.roles, name=role)
-        user = ctx.message.author
-        await user.add_roles(role)
+        if role == 'exec'or role == 'participant' or role=='TechHacks' or role=='everyone' or ('#' in role) or ('@' in role):
+            await ctx.send(f'frick off {ctx.author.mention}')
+        else:
+            await guild.create_role(name=role, color=new_col)
+            role = discord.utils.get(ctx.guild.roles, name=role)
+            user = ctx.message.author
+            await user.add_roles(role)
+            embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
+            await ctx.send(embed=embed)
 
-        embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
-        await ctx.send(embed=embed)
+            await self.all_teams(ctx)
 
-        await self.all_teams(ctx)
+
 
 
     @commands.command()
@@ -77,6 +81,20 @@ class Teams(commands.Cog):
             await ctx.send('Sorry boss, that\'s way above my pay grade')
 
 
+    @commands.command()
+    async def leave(self, ctx, *, role):
+        guild = ctx.guild
+        if role == 'participant':
+            await ctx.send(f'frick off {ctx.author.mention}')
+
+        else:
+            role = discord.utils.get(guild.roles, name=role)
+            user = ctx.message.author
+            try:
+                await user.remove_roles(role)
+                await ctx.send(f'{ctx.author.mention} has left {role}')
+            except discord.Forbidden:
+                await ctx.send('Sorry boss, that\'s way above my pay grade')
 
     @commands.command()
     @commands.has_role('exec')
@@ -101,6 +119,7 @@ class Teams(commands.Cog):
             if not role.permissions.change_nickname:
                 await role.delete()
         await self.all_teams(ctx)
+        await ctx.send('All teams removed')
 
 
 
