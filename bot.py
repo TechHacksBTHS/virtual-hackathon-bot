@@ -93,11 +93,14 @@ async def on_ready():
     await bot_channel.send('im awake senpai and ready to serve uwu')
     print('bot.py is active')
 
+
+
 @bot.event
 async def on_message(message):
     if random.randint(0, 100)>98:
         #await message.add_reaction(random.choice(emojis))
         pass
+    pass
 
 
 
