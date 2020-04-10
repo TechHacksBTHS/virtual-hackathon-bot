@@ -1,6 +1,9 @@
 import discord, random
 from discord.ext import commands
 
+#join teams by reacting to message
+#limit role creation to one role
+
 Colors = [ discord.Color.default(),
                  discord.Color.teal(),
                  discord.Color.dark_teal(),

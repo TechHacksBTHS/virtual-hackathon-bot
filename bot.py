@@ -10,17 +10,16 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix='!', description='owo i sure do L-O-V-E programming')
 TOKEN = os.environ.get('TOKEN', 3)
-AUTHOR_ID = os.environ.get('AUTHOR_ID', 3)
-print(AUTHOR_ID)
+bot_channel = bot.get_channel(697537529737510932)
 
 
 @bot.event
 async def on_ready():
-    bot_channel = bot.get_channel(697537529737510932)
 
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="you all code"))
     await bot_channel.send('im awake senpai and ready to serve uwu')
     print('bot.py is active')
+    print(bot.emojis)
 
 
 @bot.event
