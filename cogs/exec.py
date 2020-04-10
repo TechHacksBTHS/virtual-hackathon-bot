@@ -3,13 +3,16 @@ from discord.ext import commands
 from discord import Member
 
 
+
+
+
 class Exec(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print('Exec Cog is online')
+        print('exec.py is active')
 
     @commands.command()
     @commands.has_role('exec')

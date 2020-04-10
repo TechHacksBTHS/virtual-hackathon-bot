@@ -15,25 +15,13 @@ AUTHOR_ID = os.environ.get('AUTHOR_ID', 3)
 print(AUTHOR_ID)
 
 
-
-
-
-
-def is_it_me(ctx):
-    return ctx.author.id == AUTHOR_ID
-
-
-
 @bot.event
 async def on_ready():
-    all_channels = bot.get_all_channels()
-    bot_channel = None
-    for chans in all_channels:
-        if chans.id == CHANNEL:
-            bot_channel = chans
+    bot_channel = bot.get_channel(697537529737510932)
+
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="you all code"))
-    await bot_channel.send('im ready senpai uwu')
-    print('yo was poppin ;)')
+    await bot_channel.send('im awake senpai and ready to serve uwu')
+    print('bot.py is active')
 
 
 @bot.command()
