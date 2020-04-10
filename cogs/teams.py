@@ -22,7 +22,8 @@ Colors = [ discord.Color.default(),
                  discord.Color.orange(),
                  discord.Color.dark_orange(),
                  discord.Color.red(),
-                 discord.Color.dark_red()]
+                 discord.Color.dark_red()
+           ]
 
 class Teams(commands.Cog):
     def __init__(self, bot):

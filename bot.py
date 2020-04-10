@@ -96,7 +96,8 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if random.randint(0, 100)>98:
-        await message.add_reaction(random.choice(emojis))
+        #await message.add_reaction(random.choice(emojis))
+        pass
 
 
 
