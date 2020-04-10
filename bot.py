@@ -7,84 +7,59 @@ from discord import Member
 
 load_dotenv()
 from discord.ext import commands
-from discord.ext.commands import has_permissions, MissingPermissions
 
 bot = commands.Bot(command_prefix='!', description='owo i sure do L-O-V-E programming')
-TOKEN = os.environ.get('TOKEN',3)
+TOKEN = os.environ.get('TOKEN', 3)
+CHANNEL = os.environ.get('CHANNEL', 3)
+AUTHOR_ID = os.environ.get('AUTHOR_ID', 3)
+print(AUTHOR_ID)
 
-client = discord.Client()
-bot_channel = bot.get_channel(697537529737510932)
+
+
+
+
+
+def is_it_me(ctx):
+    return ctx.author.id == AUTHOR_ID
+
 
 
 @bot.event
 async def on_ready():
-    await bot_channel.send('I\'m finally awake uwu')
+    all_channels = bot.get_all_channels()
+    bot_channel = None
+    for chans in all_channels:
+        if chans.id == CHANNEL:
+            bot_channel = chans
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="you all code"))
+    await bot_channel.send('im ready senpai uwu')
+    print('yo was poppin ;)')
 
 
-@bot.command(name='create-team')
-async def create_team(ctx, role):
-    guild = ctx.guild
-    await guild.create_role(name=role)
-    role = discord.utils.get(ctx.guild.roles, name=role)
-    user = ctx.message.author
-    try:
-        await user.add_roles(role)
-    except discord.errors.Forbidden:
-        ctx.channel.send('Sorry, I can\'t let you do that. The execs are a far greater power than I, and I worship them as '
-                    'gods')
+@bot.command()
+async def load(ctx):
+    for filename in os.listdir('./cogs'):
+        if filename.endswith('.py'):
+            bot.load_extension(f'cogs.{filename[:-3]}')
 
 
-@bot.command(name='join-team')
-async def create_team(ctx, role):
-    guild = ctx.guild
-    role = discord.utils.get(guild.roles, name=role)
-    user = ctx.message.author
-    try:
-        await user.add_roles(role)
-    except discord.ext.commands.errors:
-        ctx.channel.send('Sorry, I can\'t let you do that. The execs are a far greater power than I, and I worship them as '
-                    'gods')
+@bot.command()
+async def unload(ctx):
+    for filename in os.listdir('./cogs'):
+        if filename.endswith('.py'):
+            bot.unload_extension(f'cogs.{filename[:-3]}')
 
 
-@bot.command(name='kick', pass_context=True,)
-@has_permissions(ban_members=True)
-async def _kick(ctx, member: Member):
-    await ctx.kick(member)
-    await ctx.channel.send('{} has been kicked'.format(ctx.member))
+@bot.command()
+async def reload(ctx):
+    for filename in os.listdir('./cogs'):
+        if filename.endswith('.py'):
+            bot.unload_extension(f'cogs.{filename[:-3]}')
+            bot.load_extension(f'cogs.{filename[:-3]}')
 
 
-@_kick.error
-async def kick_error(error, ctx):
-    if isinstance(error, MissingPermissions):
-        text = "I can\'t let you do that {}".format(ctx.message.author)
-        await ctx.send(ctx.message.channel, text)
-
-
-@bot.command(name='ban', pass_context=True)
-@has_permissions(ban_members=True)
-async def _ban(ctx, member: Member):
-    await ctx.ban(member)
-
-
-@_ban.error
-async def kick_error(error, ctx):
-    if isinstance(error, MissingPermissions):
-        text = "I can\'t let you do that {}".format(ctx.message.author)
-        await ctx.channel.send(text)
-
-
-@bot.command(name='99')
-async def nine_nine(ctx):
-    brooklyn_99_quotes = [
-        'I\'m the human form of the 💯 emoji.',
-        'Bingpot!',
-        (
-            'Cool. Cool cool cool cool cool cool cool, '
-            'no doubt no doubt no doubt no doubt.'
-        ),
-    ]
-    response = random.choice(brooklyn_99_quotes)
-    await ctx.channel.send(response)
-
+for filename in os.listdir('./cogs'):
+    if filename.endswith('.py'):
+        bot.load_extension(f'cogs.{filename[:-3]}')
 
 bot.run(TOKEN)
