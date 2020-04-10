@@ -1,4 +1,4 @@
-import discord
+import discord,time,random
 from discord.ext import commands
 from discord import Member
 
@@ -15,13 +15,15 @@ class Exec(commands.Cog):
         print('exec.py is active')
 
     @commands.command()
-    @commands.has_role('exec')
-    async def clear(self, ctx, amount=5):
-        if amount == 'all':
-            await ctx.channel.purge()
+    @commands.has_permissions(manage_messages=True)
+    async def clear(self, ctx, amount=5, Channel=''):
+        if Channel == '':
+            Channel = ctx.channel
         else:
-            await ctx.channel.purge(limit=amount)
-        await ctx.send('Cleared by {}'.format(ctx.author.mention))
+            Channel = self.bot.get_channel(Channel)
+
+        await Channel.purge(limit=amount)
+        await Channel.send('Cleared by {}'.format(ctx.author.mention))
 
     @commands.command()
     @commands.has_role('exec')

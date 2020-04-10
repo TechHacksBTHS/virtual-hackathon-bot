@@ -1,8 +1,11 @@
-import discord, random
+import discord, random,time
 from discord.ext import commands
 
 #join teams by reacting to message
 #limit role creation to one role
+
+def unpack(s):
+    return "\n".join(map(str, s))
 
 Colors = [ discord.Color.default(),
                  discord.Color.teal(),
@@ -29,6 +32,22 @@ class Teams(commands.Cog):
     async def on_ready(self):
         print('teams.py is active')
 
+
+    @commands.command()
+    async def all_teams(self,ctx):
+        channel = self.bot.get_channel(698146745258999948)
+        created_teams = []
+        for role in ctx.guild.roles:
+            if not role.permissions.change_nickname:
+                created_teams.append(role)
+
+        await channel.purge(limit=100)
+        if created_teams == []:
+            created_teams.append('No teams yet, use !create <teamname> to create one!')
+        embed = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(created_teams)}', color=random.choice(Colors))
+        await channel.send(embed=embed)
+
+
     @commands.command()
     async def create(self, ctx, *, role):
         guild = ctx.guild
@@ -41,6 +60,9 @@ class Teams(commands.Cog):
         embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
         await ctx.send(embed=embed)
 
+        await self.all_teams(ctx)
+
+
     @commands.command()
     async def join(self, ctx, *, role):
         guild = ctx.guild
@@ -48,8 +70,11 @@ class Teams(commands.Cog):
         user = ctx.message.author
         try:
             await user.add_roles(role)
+            await ctx.send(f'{ctx.author.mention} has joined {role}')
         except discord.Forbidden:
             await ctx.send('Sorry boss, that\'s way above my pay grade')
+
+
 
     @commands.command()
     @commands.has_role('exec')
@@ -60,10 +85,23 @@ class Teams(commands.Cog):
             try:
                 await role.delete()
                 await ctx.send("The role {} has been deleted!".format(role.name))
+                await self.all_teams(ctx)
             except discord.Forbidden:
                 await ctx.send('Sorry boss, that\'s way above my pay grade')
         else:
             await ctx.send("The role doesn't exist!")
+
+
+    @commands.command()
+    @commands.has_role('exec')
+    async def purge(self, ctx):
+        for role in ctx.guild.roles:
+            if not role.permissions.change_nickname:
+                await role.delete()
+        await self.all_teams(ctx)
+
+
+
 
 
 def setup(bot):
