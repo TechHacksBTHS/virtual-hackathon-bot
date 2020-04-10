@@ -28,6 +28,7 @@ async def on_member_join(member):
 
 
 @bot.command()
+@commands.has_role('exec')
 async def load(ctx):
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
@@ -35,6 +36,7 @@ async def load(ctx):
 
 
 @bot.command()
+@commands.has_role('exec')
 async def unload(ctx):
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
@@ -42,6 +44,7 @@ async def unload(ctx):
 
 
 @bot.command()
+@commands.has_role('exec')
 async def reload(ctx):
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):

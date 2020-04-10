@@ -34,7 +34,7 @@ class Teams(commands.Cog):
         print('teams.py is active')
 
 
-    @commands.command()
+    @commands.command(hidden=True)
     async def all_teams(self,ctx):
         channel = self.bot.get_channel(698146745258999948)
         created_teams = []
