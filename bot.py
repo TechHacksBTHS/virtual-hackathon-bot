@@ -2,27 +2,18 @@
 import os, json, base64
 from firebase import firebase
 
-
-
 import discord, random
 from dotenv import load_dotenv
 from discord import Member
 
-
 load_dotenv()
 from discord.ext import commands
-
-data = {
-    "USER": 'username',
-    'TEAM': 'team',
-
-}
 
 bot = commands.Bot(command_prefix='!', description='owo i sure do L-O-V-E programming')
 TOKEN = os.environ.get('TOKEN')
 FIREBASE = os.environ.get('FIREBASE', 3)
 FIREBASE_NAME = os.environ.get('FIREBASE_NAME', 3)
-#firebase = firebase.FirebaseApplication(FIREBASE, None)
+firebase = firebase.FirebaseApplication(FIREBASE, None)
 
 
 @bot.event
@@ -30,8 +21,9 @@ async def on_ready():
     bot_channel = bot.get_channel(697537529737510932)
     sunglasses = bot.get_emoji(698234865576968203)
     await bot.change_presence(
-        #"you all code"
-        activity=discord.Activity(type=discord.ActivityType.watching, name="myself break over & over", emoji=sunglasses))
+        # "you all code"
+        activity=discord.Activity(type=discord.ActivityType.watching, name="myself break over & over",
+                                  emoji=sunglasses))
     await bot_channel.send('im awake senpai and ready to serve uwu')
     print('bot.py is active')
 
@@ -40,10 +32,9 @@ async def on_ready():
 async def ping(ctx):
     data = {
         "USER": 'pong',
-        'TEAM': 'ping',
-    }
-    #result = firebase.post(FIREBASE_NAME + '/Team', data)
-    #print(result)
+        'TEAM': 'ping'}
+    result = firebase.post(FIREBASE_NAME + '/Team', data)
+    print(result)
     await ctx.send('pong')
 
 
@@ -81,7 +72,5 @@ async def reload(ctx):
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
-
-
 
 bot.run(TOKEN)
