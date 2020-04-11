@@ -54,7 +54,7 @@ class Teams(commands.Cog):
         await channel.purge(limit=100)
         if created_teams == []:
             created_teams.append('No teams yet, use !create <teamname> to create one!')
-        embed = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(created_teams)}',
+        embed = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(created_teams.reverse())}',
                               color=random.choice(Colors))
         await channel.send(embed=embed)
 
@@ -76,6 +76,8 @@ class Teams(commands.Cog):
                 await ctx.send(embed=embed)
 
                 await self.all_teams(ctx)
+                print(all_created_teams)
+
         else:
             await ctx.send('You are already on a team!')
             print(all_created_teams)
