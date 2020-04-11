@@ -60,13 +60,13 @@ class Teams(commands.Cog):
         guild = ctx.guild
         new_col = random.choice(Colors)
         if role == 'exec' or role == 'participant' or role == 'TechHacks' or role == 'everyone' or ('#' in role) or (
-                '@' in role):
+                '@' in role) or ('http://' in role) or ('https://' in role) or ('.' in role):
             await ctx.send(f'frick off {ctx.author.mention}')
         else:
             await guild.create_role(name=role, color=new_col)
+            time.sleep(3)
             role = discord.utils.get(ctx.guild.roles, name=role)
             user = ctx.message.author
-            time.sleep(3)
             await user.add_roles(role)
             embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
             await ctx.send(embed=embed)
@@ -80,6 +80,7 @@ class Teams(commands.Cog):
         user = ctx.message.author
         try:
             await user.add_roles(role)
+            #todo unless user is already in the team sigh
             await ctx.send(f'{ctx.author.mention} has joined {role}')
         except discord.Forbidden:
             await ctx.send('Sorry boss, that\'s way above my pay grade')
