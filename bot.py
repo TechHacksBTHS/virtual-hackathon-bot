@@ -22,7 +22,7 @@ bot = commands.Bot(command_prefix='!', description='owo i sure do L-O-V-E progra
 TOKEN = os.environ.get('TOKEN', 3)
 FIREBASE = os.environ.get('FIREBASE', 3)
 FIREBASE_NAME = os.environ.get('FIREBASE_NAME', 3)
-firebase = firebase.FirebaseApplication(FIREBASE, None)
+#firebase = firebase.FirebaseApplication(FIREBASE, None)
 
 
 @bot.event
@@ -30,7 +30,8 @@ async def on_ready():
     bot_channel = bot.get_channel(697537529737510932)
     sunglasses = bot.get_emoji(698234865576968203)
     await bot.change_presence(
-        activity=discord.Activity(type=discord.ActivityType.watching, name="you all code", emoji=sunglasses))
+        #"you all code"
+        activity=discord.Activity(type=discord.ActivityType.watching, name="myself break over & over", emoji=sunglasses))
     await bot_channel.send('im awake senpai and ready to serve uwu')
     print('bot.py is active')
 
@@ -41,8 +42,8 @@ async def ping(ctx):
         "USER": 'pong',
         'TEAM': 'ping',
     }
-    result = firebase.post(FIREBASE_NAME + '/Team', data)
-    print(result)
+    #result = firebase.post(FIREBASE_NAME + '/Team', data)
+    #print(result)
     await ctx.send('pong')
 
 
