@@ -94,7 +94,7 @@ class Teams(commands.Cog):
             if not role.permissions.change_nickname:
                 created_teams.append(role)
 
-        if any(i in ctx.author.roles for i in created_teams) or created_teams == []:
+        if ctx.author.roles in created_teams or created_teams == []:
             guild = ctx.guild
             role = discord.utils.get(guild.roles, name=role)
             user = ctx.message.author
