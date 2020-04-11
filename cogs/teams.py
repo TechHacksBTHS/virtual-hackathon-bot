@@ -55,12 +55,12 @@ class Teams(commands.Cog):
                               color=random.choice(Colors))
         await channel.send(embed=embed)
 
+
     @commands.command()
     async def create(self, ctx, *, role):
         guild = ctx.guild
         new_col = random.choice(Colors)
-        if role == 'exec' or role == 'participant' or role == 'TechHacks' or role == 'everyone' or ('#' in role) or (
-                '@' in role) or ('http://' in role) or ('https://' in role) or ('.' in role):
+        if ('@' or 'participant' or 'TechHacks' or 'everyone' or '#' or 'http' or '.' ) in role:
             await ctx.send(f'frick off {ctx.author.mention}')
         else:
             await guild.create_role(name=role, color=new_col)
