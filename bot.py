@@ -44,7 +44,7 @@ async def on_member_join(member):
     await member.add_roles(role)
 
 
-@bot.command()
+@bot.command(hidden=True)
 @commands.has_role('exec')
 async def load(ctx):
     for filename in os.listdir('./cogs'):
@@ -52,7 +52,7 @@ async def load(ctx):
             bot.load_extension(f'cogs.{filename[:-3]}')
 
 
-@bot.command()
+@bot.command(hidden=True)
 @commands.has_role('exec')
 async def unload(ctx):
     for filename in os.listdir('./cogs'):
@@ -60,7 +60,7 @@ async def unload(ctx):
             bot.unload_extension(f'cogs.{filename[:-3]}')
 
 
-@bot.command()
+@bot.command(hidden=True)
 @commands.has_role('exec')
 async def reload(ctx):
     for filename in os.listdir('./cogs'):
@@ -72,5 +72,6 @@ async def reload(ctx):
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
+
 
 bot.run(TOKEN)
