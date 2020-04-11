@@ -47,9 +47,9 @@ class Teams(commands.Cog):
 
     @commands.command(hidden=True)
     async def all_teams(self, ctx):
+        await self.bot.wait_until_ready()
         channel = self.bot.get_channel(698146745258999948)
         created_teams = []
-        print(ctx.guild.roles)
         for role in ctx.guild.roles:
             if not role.permissions.change_nickname:
                 created_teams.append(role)
@@ -65,10 +65,14 @@ class Teams(commands.Cog):
     @commands.command(name='create')
     @commands.has_role('participant')
     async def create(self, ctx, *, role):
+        await self.bot.wait_until_ready()
+        role = str(role)
+        print(role)
         guild = ctx.guild
-        if ('@' or '#' or 'http' or '.') in role:
-                await ctx.send(f'That is an illegal name, names cannot include \'.\', \'\' off {ctx.author.mention}')
-        if (get(ctx.guild.roles,name=role)) in ctx.guild.roles:
+        if ('@' in role) or  ('#' in role) or ('http' in role) or ('.' in role):
+                await ctx.send(f'That is an illegal name, names cannot include \'.\', \'@\',\'#\' or \'http\'. Capishe {ctx.author.mention}?')
+                return
+        elif (get(ctx.guild.roles,name=role)) in ctx.guild.roles:
             await ctx.send(f'Team {role} already exists, pick a new name or do !join to join them!')
         else:
             new_col = random.choice(Colors)
@@ -78,25 +82,17 @@ class Teams(commands.Cog):
             await user.add_roles(role)
             particpant = discord.utils.get(ctx.guild.roles, name='participant')
             await user.remove_roles(particpant)
-
             embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
             await ctx.send(embed=embed)
-
             await self.all_teams(ctx)
 
-    @create.error
-    async def create_error(self,ctx,error):
-        if isinstance(error, commands.MissingRole):
-            await ctx.send('You already have a team silly!')
-        if isinstance(error, commands.MissingAnyRole):
-            await ctx.send('You already have a team silly!')
-        if isinstance(error, commands.MissingPermissions):
-            await ctx.send('You already have a team silly!')
 
 
 
     @commands.command()
     async def join(self, ctx, *, role):
+        await self.bot.wait_until_ready()
+        role = str(role)
         user = ctx.message.author
 
         guild = ctx.guild
@@ -120,6 +116,7 @@ class Teams(commands.Cog):
 
     @commands.command()
     async def leave(self, ctx):
+        await self.bot.wait_until_ready()
         guild = ctx.guild
         exec_role = get(guild.roles, name='exec')
         everyone_role = get(guild.roles, name='@everyone')
@@ -150,7 +147,9 @@ class Teams(commands.Cog):
     @commands.command()
     @commands.has_role('exec')
     async def remove(self, ctx, *, role):
+        await self.bot.wait_until_ready()
         guild = ctx.guild
+        print(ctx.message.author)
         role = discord.utils.get(guild.roles, name=role)
         participant_role = get(guild.roles,name='participant')
         if role:
@@ -159,7 +158,9 @@ class Teams(commands.Cog):
                 embed = discord.Embed(title="The role {} has been deleted!".format(role.name), description='',
                                       color=col)
                 for i in role.members:
-                    await i.add_role(participant_role)
+                    member = i
+                    print(i)
+                    await member.add_roles(participant_role)
                 await role.delete()
                 await ctx.send(embed=embed)
                 await self.all_teams(ctx)
@@ -171,12 +172,13 @@ class Teams(commands.Cog):
     @commands.command()
     @commands.has_role('exec')
     async def purge(self, ctx):
+        await self.bot.wait_until_ready()
         guild = ctx.guild
         participant_role = get(guild.roles,name='participant')
         for role in ctx.guild.roles:
             if not role.permissions.change_nickname:
-                for i in guild.members:
-                    await i.add_role(participant_role)
+                for i in role.members:
+                    await i.add_roles(participant_role)
                 await role.delete()
         await self.all_teams(ctx)
         await ctx.send('All teams removed')

@@ -15,6 +15,7 @@ class Exec(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx, amount=5, Channel=''):
+        await self.bot.wait_until_ready()
         if Channel == '':
             Channel = ctx.channel
         else:
@@ -26,18 +27,21 @@ class Exec(commands.Cog):
     @commands.command()
     @commands.has_role('exec')
     async def kick(self, ctx, member: Member, *, reason=None):
+        await self.bot.wait_until_ready()
         await member.kick(reason=reason)
         await ctx.send(f'Kicked {member.mention} for: {reason}')
 
     @commands.command()
     @commands.has_role('exec')
     async def ban(self, ctx, member: Member, *, reason=None):
+        await self.bot.wait_until_ready()
         await member.ban(reason=reason)
         await ctx.send(f'Banned {member.mention} for: {reason}')
 
     @commands.command()
     @commands.has_role('exec')
     async def unban(self, ctx, *, member):
+        await self.bot.wait_until_ready()
         banned_users = await ctx.guild.bans()
         member_name, member_discriminator = member.split('#')
         for ban_entry in banned_users:
@@ -58,6 +62,8 @@ class Exec(commands.Cog):
             return
         elif isinstance(error, commands.CommandNotFound):
             await ctx.send('404 Command Not Found')
+        elif isinstance(error, commands.MissingRole):
+            await ctx.send('You already have a team silly!')
         else:
             await ctx.send(f'{error} error occured')
 
