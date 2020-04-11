@@ -146,17 +146,20 @@ class Teams(commands.Cog):
             except discord.Forbidden:
                 await ctx.send('Sorry boss, that\'s way above my pay grade')
 
+
     @commands.command()
     @commands.has_role('exec')
     async def remove(self, ctx, *, role):
         guild = ctx.guild
         role = discord.utils.get(guild.roles, name=role)
+        participant_role = get(guild.roles,name='participant')
         if role:
             try:
                 col = role.color
                 embed = discord.Embed(title="The role {} has been deleted!".format(role.name), description='',
                                       color=col)
-
+                for i  in role.members:
+                    i.add_role(participant_role)
                 await role.delete()
                 await ctx.send(embed=embed)
                 await self.all_teams(ctx)
@@ -168,14 +171,16 @@ class Teams(commands.Cog):
     @commands.command()
     @commands.has_role('exec')
     async def purge(self, ctx):
+        guild = ctx.guild
+        participant_role = get(guild.roles,name='participant')
         for role in ctx.guild.roles:
             if not role.permissions.change_nickname:
+                for i in role.members:
+                    i.add_role(participant_role)
                 await role.delete()
         await self.all_teams(ctx)
         await ctx.send('All teams removed')
-        for member in ctx.guild.members:
-            role = discord.utils.get(member.guild.roles, name='participant')
-            member.add_roles(role)
+
 
         all_created_teams = []
 
