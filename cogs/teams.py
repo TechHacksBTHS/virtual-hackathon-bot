@@ -158,8 +158,8 @@ class Teams(commands.Cog):
                 col = role.color
                 embed = discord.Embed(title="The role {} has been deleted!".format(role.name), description='',
                                       color=col)
-                for i  in role.members:
-                    i.add_role(participant_role)
+                for i in role.members:
+                    await i.add_role(participant_role)
                 await role.delete()
                 await ctx.send(embed=embed)
                 await self.all_teams(ctx)
@@ -176,7 +176,7 @@ class Teams(commands.Cog):
         for role in ctx.guild.roles:
             if not role.permissions.change_nickname:
                 for i in role.members:
-                    i.add_role(participant_role)
+                    await i.add_role(participant_role)
                 await role.delete()
         await self.all_teams(ctx)
         await ctx.send('All teams removed')
