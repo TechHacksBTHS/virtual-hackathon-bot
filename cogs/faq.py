@@ -4,7 +4,7 @@ from discord.ext import commands
 
 #FAQ
 
-class Example(commands.Cog):
+class FAQ(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -16,4 +16,4 @@ class Example(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Example(bot))
+    bot.add_cog(FAQ(bot))
