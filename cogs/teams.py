@@ -60,36 +60,43 @@ class Teams(commands.Cog):
 
     @commands.command()
     async def create(self, ctx, *, role):
-        guild = ctx.guild
-        new_col = random.choice(Colors)
-        if ('@' or 'participant' or 'TechHacks' or 'everyone' or '#' or 'http' or '.' ) in role or (role in all_created_teams):
-            await ctx.send(f'frick off {ctx.author.mention}')
-        else:
-            await guild.create_role(name=role, color=new_col)
-            time.sleep(3)
-            role = discord.utils.get(ctx.guild.roles, name=role)
-            user = ctx.message.author
-            await user.add_roles(role)
-            embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
-            await ctx.send(embed=embed)
+        if [i for i in ctx.author.roles if i in all_created_teams]:
+            guild = ctx.guild
+            new_col = random.choice(Colors)
+            if ('@' or 'participant' or 'TechHacks' or 'everyone' or '#' or 'http' or '.' ) in role or (role in all_created_teams):
+                await ctx.send(f'frick off {ctx.author.mention}')
+            else:
+                await guild.create_role(name=role, color=new_col)
+                time.sleep(3)
+                role = discord.utils.get(ctx.guild.roles, name=role)
+                user = ctx.message.author
+                await user.add_roles(role)
+                embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
+                await ctx.send(embed=embed)
 
-            await self.all_teams(ctx)
+                await self.all_teams(ctx)
+        else:
+            await ctx.send('You are already on a team!')
 
     @commands.command()
     async def join(self, ctx, *, role):
-        guild = ctx.guild
-        role = discord.utils.get(guild.roles, name=role)
-        user = ctx.message.author
-        try:
-            if role not in user.roles:
-                await user.add_roles(role)
-                col = role.color
-                embed = discord.Embed(title=f'{ctx.author.mention} has joined {role}', description='', color=col)
-                await ctx.send(embed=embed)
-            else:
-                await ctx.send('You already have that role!')
-        except discord.Forbidden:
-            await ctx.send('Sorry boss, that\'s way above my pay grade')
+        if [i for i in ctx.author.roles if i in all_created_teams]:
+            guild = ctx.guild
+            role = discord.utils.get(guild.roles, name=role)
+            user = ctx.message.author
+            try:
+                if role not in user.roles:
+                    await user.add_roles(role)
+                    col = role.color
+                    embed = discord.Embed(title=f'{ctx.author} has joined {role}', description='', color=col)
+                    await ctx.send(embed=embed)
+                else:
+                    await ctx.send('You already have that role!')
+            except discord.Forbidden:
+                await ctx.send('Sorry boss, that\'s way above my pay grade')
+        else:
+            await ctx.send('You are already on a team!')
+
 
     @commands.command()
     async def leave(self, ctx, *, role):
