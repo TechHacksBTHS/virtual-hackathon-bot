@@ -9,20 +9,23 @@ from discord import Member
 import firebase_admin
 from firebase_admin import credentials
 
-private_key = os.environ.get('private_key', 3)
-client_email = os.environ.get('client_email', 3)
-token_uri = os.environ.get('token_uri', 3)
-private_key_id = os.environ.get('private_key_id',3)
-client_x509_cert_url = os.environ.get('client_x509_cert_url',3)
-auth_provider_x509_cert_url = os.environ.get('auth_provider_x509_cert_url',3)
-auth_uri = os.environ.get('auth_uri',3)
-
+private_key = os.environ.get('private_key')
+client_email = os.environ.get('client_email')
+token_uri = os.environ.get('token_uri')
+private_key_id = os.environ.get('private_key_id')
+client_x509_cert_url = os.environ.get('client_x509_cert_url')
+auth_provider_x509_cert_url = os.environ.get('auth_provider_x509_cert_url')
+auth_uri = os.environ.get('auth_uri')
+client_id = os.environ.get('client_id')
 
 credent = {
     "type": "service_account",
+    "project_id": "techhacks-bot",
     "private_key_id": private_key_id,
     "private_key": private_key,
     "client_email": client_email,
+    "client_id": "103351357918510994086",
+    "auth_uri": auth_uri,
     "token_uri": token_uri,
     "client_x509_cert_url": client_x509_cert_url,
     "auth_provider_x509_cert_url": auth_provider_x509_cert_url,
