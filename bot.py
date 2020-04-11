@@ -1,38 +1,13 @@
 # bot.py
-import os, json
+import os, json, base64
 from firebase import firebase
+
+
 
 import discord, random
 from dotenv import load_dotenv
 from discord import Member
 
-import firebase_admin
-from firebase_admin import credentials
-
-private_key = os.environ.get('private_key')
-client_email = os.environ.get('client_email')
-token_uri = os.environ.get('token_uri')
-private_key_id = os.environ.get('private_key_id')
-client_x509_cert_url = os.environ.get('client_x509_cert_url')
-auth_provider_x509_cert_url = os.environ.get('auth_provider_x509_cert_url')
-auth_uri = os.environ.get('auth_uri')
-client_id = os.environ.get('client_id')
-
-credent = {
-    "type": "service_account",
-    "project_id": "techhacks-bot",
-    "private_key_id": private_key_id,
-    "private_key": private_key,
-    "client_email": client_email,
-    "client_id": "103351357918510994086",
-    "auth_uri": auth_uri,
-    "token_uri": token_uri,
-    "client_x509_cert_url": client_x509_cert_url,
-    "auth_provider_x509_cert_url": auth_provider_x509_cert_url,
-}
-
-cred = credentials.Certificate(credent)
-firebase_admin.initialize_app(cred)
 
 load_dotenv()
 from discord.ext import commands
@@ -47,7 +22,7 @@ bot = commands.Bot(command_prefix='!', description='owo i sure do L-O-V-E progra
 TOKEN = os.environ.get('TOKEN', 3)
 FIREBASE = os.environ.get('FIREBASE', 3)
 FIREBASE_NAME = os.environ.get('FIREBASE_NAME', 3)
-FIREBASE_ADMIN = os.environ.get('FIREBASE_ADMIN', 3)
+firebase = firebase.FirebaseApplication(FIREBASE, None)
 
 
 @bot.event
