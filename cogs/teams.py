@@ -68,7 +68,7 @@ class Teams(commands.Cog):
         guild = ctx.guild
         if ('@' or '#' or 'http' or '.') in role:
                 await ctx.send(f'That is an illegal name, names cannot include \'.\', \'\' off {ctx.author.mention}')
-        if (role) in ctx.guild.roles:
+        if (get(ctx.guild.roles,name=role)) in ctx.guild.roles:
             await ctx.send(f'Team {role} already exists, pick a new name or do !join to join them!')
         else:
             new_col = random.choice(Colors)
@@ -185,8 +185,14 @@ class Teams(commands.Cog):
         all_created_teams = []
 
     @commands.command(name='test', hidden=True)
+
     async def test(self,ctx):
-        await ctx.send(ctx.author.roles)
+        guild = ctx.guild
+        everyone_role = get(guild.roles, name='@everyone')
+        roles = ctx.author.roles
+        if everyone_role in roles:
+            roles.remove(everyone_role)
+        print(ctx.send(roles))
 
 
     """
