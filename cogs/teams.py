@@ -175,7 +175,7 @@ class Teams(commands.Cog):
         participant_role = get(guild.roles,name='participant')
         for role in ctx.guild.roles:
             if not role.permissions.change_nickname:
-                for i in role.members:
+                for i in guild.members:
                     await i.add_role(participant_role)
                 await role.delete()
         await self.all_teams(ctx)
