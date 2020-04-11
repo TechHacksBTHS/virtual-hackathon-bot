@@ -12,6 +12,7 @@ from discord.ext import commands
 def unpack(s):
     return "\n".join(map(str, s))
 
+all_created_teams = []
 
 Colors = [discord.Color.default(),
           discord.Color.teal(),
@@ -47,6 +48,7 @@ class Teams(commands.Cog):
         for role in ctx.guild.roles:
             if not role.permissions.change_nickname:
                 created_teams.append(role)
+                all_created_teams.append(role)
 
         await channel.purge(limit=100)
         if created_teams == []:
@@ -60,7 +62,7 @@ class Teams(commands.Cog):
     async def create(self, ctx, *, role):
         guild = ctx.guild
         new_col = random.choice(Colors)
-        if ('@' or 'participant' or 'TechHacks' or 'everyone' or '#' or 'http' or '.' ) in role:
+        if ('@' or 'participant' or 'TechHacks' or 'everyone' or '#' or 'http' or '.' ) in role or (role in all_created_teams):
             await ctx.send(f'frick off {ctx.author.mention}')
         else:
             await guild.create_role(name=role, color=new_col)
@@ -79,9 +81,13 @@ class Teams(commands.Cog):
         role = discord.utils.get(guild.roles, name=role)
         user = ctx.message.author
         try:
-            await user.add_roles(role)
-            #todo unless user is already in the team sigh
-            await ctx.send(f'{ctx.author.mention} has joined {role}')
+            if role not in user.roles:
+                await user.add_roles(role)
+                col = role.Color()
+                embed = discord.Embed(title=f'{ctx.author.mention} has joined {role}', description='', color=col)
+                await ctx.send(embed=embed)
+            else:
+                ctx.send('You already have that role!')
         except discord.Forbidden:
             await ctx.send('Sorry boss, that\'s way above my pay grade')
 
@@ -107,8 +113,12 @@ class Teams(commands.Cog):
         role = discord.utils.get(guild.roles, name=role)
         if role:
             try:
+                col = role.Color()
+                embed = discord.Embed(title="The role {} has been deleted!".format(role.name), description='', color=col)
+                if role in all_created_teams:
+                    all_created_teams.remove(role)
                 await role.delete()
-                await ctx.send("The role {} has been deleted!".format(role.name))
+                await ctx.send(embed=embed)
                 await self.all_teams(ctx)
             except discord.Forbidden:
                 await ctx.send('Sorry boss, that\'s way above my pay grade')
@@ -123,6 +133,7 @@ class Teams(commands.Cog):
                 await role.delete()
         await self.all_teams(ctx)
         await ctx.send('All teams removed')
+        all_created_teams = []
 
 
 def setup(bot):
