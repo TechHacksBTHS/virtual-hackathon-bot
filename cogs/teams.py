@@ -77,6 +77,7 @@ class Teams(commands.Cog):
                 await self.all_teams(ctx)
         else:
             await ctx.send('You are already on a team!')
+            print(all_created_teams)
 
     @commands.command()
     async def join(self, ctx, *, role):
