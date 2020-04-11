@@ -87,7 +87,7 @@ class Teams(commands.Cog):
                 embed = discord.Embed(title=f'{ctx.author.mention} has joined {role}', description='', color=col)
                 await ctx.send(embed=embed)
             else:
-                ctx.send('You already have that role!')
+                await ctx.send('You already have that role!')
         except discord.Forbidden:
             await ctx.send('Sorry boss, that\'s way above my pay grade')
 
