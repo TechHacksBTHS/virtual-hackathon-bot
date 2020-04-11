@@ -19,7 +19,7 @@ data = {
 }
 
 bot = commands.Bot(command_prefix='!', description='owo i sure do L-O-V-E programming')
-TOKEN = os.environ.get('TOKEN', 3)
+TOKEN = os.environ.get('TOKEN')
 FIREBASE = os.environ.get('FIREBASE', 3)
 FIREBASE_NAME = os.environ.get('FIREBASE_NAME', 3)
 #firebase = firebase.FirebaseApplication(FIREBASE, None)
@@ -81,5 +81,7 @@ async def reload(ctx):
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
+
+
 
 bot.run(TOKEN)
