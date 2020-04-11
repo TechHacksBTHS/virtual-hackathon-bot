@@ -12,6 +12,7 @@ from discord.ext import commands
 def unpack(s):
     return "\n".join(map(str, s))
 
+
 all_created_teams = []
 
 Colors = [discord.Color.default(),
@@ -57,13 +58,13 @@ class Teams(commands.Cog):
                               color=random.choice(Colors))
         await channel.send(embed=embed)
 
-
     @commands.command()
     async def create(self, ctx, *, role):
-        if any(i in all_created_teams for i in ctx.author.roles):
+        if any(i in all_created_teams for i in ctx.author.roles) or all_created_teams == []:
             guild = ctx.guild
             new_col = random.choice(Colors)
-            if ('@' or 'participant' or 'TechHacks' or 'everyone' or '#' or 'http' or '.' ) in role or (role in all_created_teams):
+            if ('@' or 'participant' or 'TechHacks' or 'everyone' or '#' or 'http' or '.') in role or (
+                    role in all_created_teams):
                 await ctx.send(f'frick off {ctx.author.mention}')
             else:
                 await guild.create_role(name=role, color=new_col)
@@ -81,7 +82,7 @@ class Teams(commands.Cog):
 
     @commands.command()
     async def join(self, ctx, *, role):
-        if any(i in all_created_teams for i in ctx.author.roles):
+        if any(i in all_created_teams for i in ctx.author.roles) or all_created_teams == []:
             guild = ctx.guild
             role = discord.utils.get(guild.roles, name=role)
             user = ctx.message.author
@@ -97,7 +98,6 @@ class Teams(commands.Cog):
                 await ctx.send('Sorry boss, that\'s way above my pay grade')
         else:
             await ctx.send('You are already on a team!')
-
 
     @commands.command()
     async def leave(self, ctx, *, role):
@@ -122,7 +122,8 @@ class Teams(commands.Cog):
         if role:
             try:
                 col = role.color
-                embed = discord.Embed(title="The role {} has been deleted!".format(role.name), description='', color=col)
+                embed = discord.Embed(title="The role {} has been deleted!".format(role.name), description='',
+                                      color=col)
                 if role in all_created_teams:
                     all_created_teams.remove(role)
                 await role.delete()
