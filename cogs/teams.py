@@ -83,7 +83,7 @@ class Teams(commands.Cog):
         try:
             if role not in user.roles:
                 await user.add_roles(role)
-                col = role.Color()
+                col = role.color
                 embed = discord.Embed(title=f'{ctx.author.mention} has joined {role}', description='', color=col)
                 await ctx.send(embed=embed)
             else:
@@ -113,7 +113,7 @@ class Teams(commands.Cog):
         role = discord.utils.get(guild.roles, name=role)
         if role:
             try:
-                col = role.Color()
+                col = role.color
                 embed = discord.Embed(title="The role {} has been deleted!".format(role.name), description='', color=col)
                 if role in all_created_teams:
                     all_created_teams.remove(role)
