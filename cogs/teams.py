@@ -60,7 +60,7 @@ class Teams(commands.Cog):
 
     @commands.command()
     async def create(self, ctx, *, role):
-        if [i for i in ctx.author.roles if i in all_created_teams]:
+        if any(i in all_created_teams for i in ctx.author.roles):
             guild = ctx.guild
             new_col = random.choice(Colors)
             if ('@' or 'participant' or 'TechHacks' or 'everyone' or '#' or 'http' or '.' ) in role or (role in all_created_teams):
@@ -81,7 +81,7 @@ class Teams(commands.Cog):
 
     @commands.command()
     async def join(self, ctx, *, role):
-        if [i for i in ctx.author.roles if i in all_created_teams]:
+        if any(i in all_created_teams for i in ctx.author.roles):
             guild = ctx.guild
             role = discord.utils.get(guild.roles, name=role)
             user = ctx.message.author
