@@ -13,7 +13,6 @@ def unpack(s):
     return "\n".join(map(str, s))
 
 
-all_created_teams = []
 
 Colors = [discord.Color.default(),
           discord.Color.teal(),
@@ -34,9 +33,11 @@ Colors = [discord.Color.default(),
           ]
 
 
+
 class Teams(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -49,7 +50,6 @@ class Teams(commands.Cog):
         for role in ctx.guild.roles:
             if not role.permissions.change_nickname:
                 created_teams.append(role)
-                all_created_teams.append(role)
 
         await channel.purge(limit=100)
         if created_teams == []:
@@ -60,11 +60,16 @@ class Teams(commands.Cog):
 
     @commands.command()
     async def create(self, ctx, *, role):
-        if any(i in all_created_teams for i in ctx.author.roles) or all_created_teams == []:
+        created_teams = []
+        for role in ctx.guild.roles:
+            if not role.permissions.change_nickname:
+                created_teams.append(role)
+
+        if any(i in created_teams for i in ctx.author.roles) or created_teams == []:
             guild = ctx.guild
             new_col = random.choice(Colors)
             if ('@' or 'participant' or 'TechHacks' or 'everyone' or '#' or 'http' or '.') in role or (
-                    role in all_created_teams):
+                    role in created_teams):
                 await ctx.send(f'frick off {ctx.author.mention}')
             else:
                 await guild.create_role(name=role, color=new_col)
@@ -76,15 +81,20 @@ class Teams(commands.Cog):
                 await ctx.send(embed=embed)
 
                 await self.all_teams(ctx)
-                print(all_created_teams)
+                print(created_teams)
 
         else:
             await ctx.send('You are already on a team!')
-            print(all_created_teams)
+            print(created_teams)
 
     @commands.command()
     async def join(self, ctx, *, role):
-        if any(i in all_created_teams for i in ctx.author.roles) or all_created_teams == []:
+        created_teams = []
+        for role in ctx.guild.roles:
+            if not role.permissions.change_nickname:
+                created_teams.append(role)
+
+        if any(i in created_teams for i in ctx.author.roles) or created_teams == []:
             guild = ctx.guild
             role = discord.utils.get(guild.roles, name=role)
             user = ctx.message.author
@@ -126,8 +136,7 @@ class Teams(commands.Cog):
                 col = role.color
                 embed = discord.Embed(title="The role {} has been deleted!".format(role.name), description='',
                                       color=col)
-                if role in all_created_teams:
-                    all_created_teams.remove(role)
+
                 await role.delete()
                 await ctx.send(embed=embed)
                 await self.all_teams(ctx)
