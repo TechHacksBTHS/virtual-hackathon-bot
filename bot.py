@@ -15,6 +15,7 @@ FIREBASE = os.environ.get('FIREBASE', 3)
 FIREBASE_NAME = os.environ.get('FIREBASE_NAME', 3)
 firebase = firebase.FirebaseApplication(FIREBASE, None)
 
+bot.remove_command('help')
 
 @bot.event
 async def on_ready():
@@ -26,6 +27,31 @@ async def on_ready():
                                   emoji=sunglasses))
     await bot_channel.send('im awake senpai and ready to serve uwu')
     print('bot.py is active')
+
+
+@bot.command(name='help')
+async def help(ctx):
+    embed = discord.Embed(title='TechHacks', description='Who are we? \n'
+                                                    'As representatives of the nation\'s largest and most prestigious STEM high school, TechHacks aims to expand student tech engagement in New York City through yearly hackathons, workshops, and similar events. \n\n'
+                                                    'What is a hackathon?\n'
+                                                    'A hackathon is a programming competition where teams of two to five students come together to solve a problem or build software related to a theme.\n\n'
+                                                    ''
+                                                    ''
+                                                    ''
+                                                    ''
+                                                    'COMMANDS \n'
+                                                    'help - this command \n'
+                                                    'create - creates a team (only make one 😉)  \n '
+                                                    'join - joins a team \n'
+                                                    'leave - leaves a team \n'
+                                                    ''
+                                                    '' ,
+
+                          color=discord.Color.blue())
+    await ctx.channel.send(embed=embed)
+
+
+
 
 
 @bot.command(name='ping')
