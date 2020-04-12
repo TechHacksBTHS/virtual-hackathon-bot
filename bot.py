@@ -11,9 +11,9 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix='!', description='owo i sure do L-O-V-E programming')
 TOKEN = os.environ.get('TOKEN')
-#FIREBASE = os.environ.get('FIREBASE', 3)
-#FIREBASE_NAME = os.environ.get('FIREBASE_NAME', 3)
-#firebase = firebase.FirebaseApplication(FIREBASE, None)
+FIREBASE = os.environ.get('FIREBASE', 3)
+FIREBASE_NAME = os.environ.get('FIREBASE_NAME', 3)
+firebase = firebase.FirebaseApplication(FIREBASE, None)
 
 
 @bot.event
@@ -33,8 +33,8 @@ async def ping(ctx):
     data = {
         "USER": 'pong',
         'TEAM': 'ping'}
-#    result = firebase.post(FIREBASE_NAME + '/Team', data)
-#    print(result)
+    result = firebase.post(FIREBASE_NAME + '/Team', data)
+    print(result)
     await ctx.send('pong')
 
 
