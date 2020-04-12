@@ -94,22 +94,29 @@ class Teams(commands.Cog):
         await self.bot.wait_until_ready()
         role = str(role)
         user = ctx.message.author
-
         guild = ctx.guild
+
         everyone_role = get(guild.roles, name='@everyone')
         participant_role = get(guild.roles,name='participant')
         all_roles = ctx.author.roles
 
+
         role = discord.utils.get(guild.roles, name=role)
         try:
             if participant_role in user.roles:
+                if not (role.members > 5):
+                    await ctx.send(f'{role} already has 4 members')
+                    return
                 await user.add_roles(role)
                 await user.remove_roles(participant_role)
                 col = role.color
                 embed = discord.Embed(title=f'{ctx.author} has joined {role}', description='', color=col)
                 await ctx.send(embed=embed)
             else:
-                await ctx.send('You already have that role!')
+                if role in user.roles:
+                    await ctx.send('You already have that role!')
+                else:
+                    await ctx.send('You are already in a team!')
         except discord.Forbidden:
             await ctx.send('Sorry boss, that\'s way above my pay grade')
 

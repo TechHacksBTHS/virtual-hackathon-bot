@@ -22,7 +22,7 @@ class Exec(commands.Cog):
             Channel = self.bot.get_channel(Channel)
 
         await Channel.purge(limit=amount)
-        await Channel.send('Cleared by {}'.format(ctx.author.mention))
+        await Channel.send(f'Cleared by {ctx.author.mention}')
 
     @commands.command()
     @commands.has_role('exec')

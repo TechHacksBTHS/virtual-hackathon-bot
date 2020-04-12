@@ -36,25 +36,28 @@ async def help(ctx):
                           color=discord.Color.blue())
     embed.add_field(name='Who are we?', value='As representatives of the nation\'s largest and most prestigious STEM '
                                               'high school, TechHacks aims to expand student tech engagement in New '
-                                              'York City through yearly hackathons, workshops, and similar events.\n',
+                                              'York City through yearly hackathons, workshops, and similar events.\n\n',
                     inline=False)
+
     embed.add_field(name='What is a hackathon?', value='A hackathon is a programming competition where teams of one to '
-                                                       'four students come together to solve a problem or build \n'
+                                                       'four students come together to solve a problem or build \n\n'
                                                        'software related to a theme', inline=False)
-    embed.add_field(name='What if I don\'t know how to code?',value='That\'s perfectly fine! Begginners are totally '
-                                                                    'welcome to all TechHacks events, and mentors '
-                                                                    'will be available throughout all of our '
-                                                                    'hackathons to ask for help. Innovation and ideas '
-                                                                    'are the most important part of a project, '
-                                                                    'and not even pros finish their prototypes '
-                                                                    'sometimes. My reccomendation is for you guys to '
-                                                                    'look up P5js, and try to build something on '
-                                                                    'that.', inline=False)
 
-    embed.add_field(name='What is the theme?',value='We try to stay away from themes in order to let everyone build '
-                                                    'what they want. However, we do have a rubric category judging '
-                                                    'relevance, so be sure tp explain why your project is important!', inline=False)
+    embed.add_field(name='What if I don\'t know how to code?', value='That\'s perfectly fine! Begginners are totally '
+                                                                     'welcome to all TechHacks events, and mentors '
+                                                                     'will be available throughout all of our '
+                                                                     'hackathons to ask for help. Innovation and ideas '
+                                                                     'are the most important part of a project, '
+                                                                     'and not even pros finish their prototypes '
+                                                                     'sometimes. My reccomendation is for you guys to '
+                                                                     'look up P5js, and try to build something on '
+                                                                     'that \n\n', inline=False)
 
+    embed.add_field(name='What is the theme?', value='We try to stay away from themes in order to let everyone build '
+                                                     'what they want. However, we do have a rubric category judging '
+                                                     'relevance, so be sure tp explain why your project is important! '
+                                                     '\n\n', inline=False)
+    embed.add_field(name=' ', value='\n', inline=False)
     embed.add_field(name='Commands', value='help - this command \n'
                                            'create - creates a team (only make one 😉)  \n '
                                            'join - joins a team \n'
@@ -65,8 +68,8 @@ async def help(ctx):
 @bot.command(name='ping')
 async def ping(ctx):
     data = {
-        "USER": 'pong',
-        'TEAM': 'ping'}
+        "USER": 'heroku',
+        'TEAM': 'online'}
     result = firebase.post(FIREBASE_NAME + '/Team', data)
     print(result)
     await ctx.send('pong')
