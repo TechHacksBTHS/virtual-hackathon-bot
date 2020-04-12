@@ -19,8 +19,8 @@ class Extra(commands.Cog):
                 await message.channel.send('Happy Birthday! 🥳')
         if 'i agree' in message.content.lower():
             if not message.author.bot:
-                await message.channel.send('LMAO SIMP!!')
                 await message.add_reaction("🤡")
+                await message.channel.send('LMAO SIMP!!')
         if random.randint(0,100)> 99:
             message.add_reaction(random.choice(emojis))
 
