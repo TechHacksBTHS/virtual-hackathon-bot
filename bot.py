@@ -17,6 +17,7 @@ firebase = firebase.FirebaseApplication(FIREBASE, None)
 
 bot.remove_command('help')
 
+
 @bot.event
 async def on_ready():
     bot_channel = bot.get_channel(697537529737510932)
@@ -31,27 +32,20 @@ async def on_ready():
 
 @bot.command(name='help')
 async def help(ctx):
-    embed = discord.Embed(title='TechHacks', description='Who are we? \n'
-                                                    'As representatives of the nation\'s largest and most prestigious STEM high school, TechHacks aims to expand student tech engagement in New York City through yearly hackathons, workshops, and similar events. \n\n'
-                                                    'What is a hackathon?\n'
-                                                    'A hackathon is a programming competition where teams of two to five students come together to solve a problem or build software related to a theme.\n\n'
-                                                    ''
-                                                    ''
-                                                    ''
-                                                    ''
-                                                    'COMMANDS \n'
-                                                    'help - this command \n'
-                                                    'create - creates a team (only make one 😉)  \n '
-                                                    'join - joins a team \n'
-                                                    'leave - leaves a team \n'
-                                                    ''
-                                                    '' ,
-
+    embed = discord.Embed(title='TechHacks',
                           color=discord.Color.blue())
+    embed.add_field(name='Who are we?', value='As representatives of the nation\'s largest and most prestigious STEM '
+                                              'high school, TechHacks aims to expand student tech engagement in New '
+                                              'York City through yearly hackathons, workshops, and similar events.\n',
+                    inline=False)
+    embed.add_field(name='What is a hackathon?', value='A hackathon is a programming competition where teams of two to '
+                                                       'five students come together to solve a problem or build \n'
+                                                       'software related to a theme', inline=False)
+    embed.add_field(name='Commands', value='help - this command \n'
+                                           'create - creates a team (only make one 😉)  \n '
+                                           'join - joins a team \n'
+                                           'leave - leaves a team \n', inline=False)
     await ctx.channel.send(embed=embed)
-
-
-
 
 
 @bot.command(name='ping')
@@ -98,6 +92,5 @@ async def reload(ctx):
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
-
 
 bot.run(TOKEN)
