@@ -56,11 +56,10 @@ async def help(ctx):
                                                      'what they want. However, we do have a rubric category judging '
                                                      'relevance, so be sure tp explain why your project is important! '
                                                      '\n\n', inline=False)
-    embed.add_field(name=' ', value='\n', inline=False)
-    embed.add_field(name='Commands', value='help - this command \n'
-                                           'create - creates a team (only make one 😉)  \n '
+    embed.add_field(name='Commands', value='```css\nhelp - this command \n'
+                                           'create - creates a team (only make one 😉) \n'
                                            'join - joins a team \n'
-                                           'leave - leaves a team \n', inline=False)
+                                           'leave - leaves a team \n```', inline=False)
     await ctx.channel.send(embed=embed)
 
 
