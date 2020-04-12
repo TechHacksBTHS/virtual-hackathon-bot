@@ -38,8 +38,8 @@ async def help(ctx):
                                               'high school, TechHacks aims to expand student tech engagement in New '
                                               'York City through yearly hackathons, workshops, and similar events.\n',
                     inline=False)
-    embed.add_field(name='What is a hackathon?', value='A hackathon is a programming competition where teams of two to '
-                                                       'five students come together to solve a problem or build \n'
+    embed.add_field(name='What is a hackathon?', value='A hackathon is a programming competition where teams of one to '
+                                                       'four students come together to solve a problem or build \n'
                                                        'software related to a theme', inline=False)
     embed.add_field(name='What if I don\'t know how to code?',value='That\'s perfectly fine! Begginners are totally '
                                                                     'welcome to all TechHacks events, and mentors '
@@ -49,11 +49,11 @@ async def help(ctx):
                                                                     'and not even pros finish their prototypes '
                                                                     'sometimes. My reccomendation is for you guys to '
                                                                     'look up P5js, and try to build something on '
-                                                                    'that.')
+                                                                    'that.', inline=False)
 
     embed.add_field(name='What is the theme?',value='We try to stay away from themes in order to let everyone build '
                                                     'what they want. However, we do have a rubric category judging '
-                                                    'relevance, so be sure tp explain why your project is important!')
+                                                    'relevance, so be sure tp explain why your project is important!', inline=False)
 
     embed.add_field(name='Commands', value='help - this command \n'
                                            'create - creates a team (only make one 😉)  \n '
