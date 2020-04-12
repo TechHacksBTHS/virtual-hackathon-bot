@@ -1,7 +1,10 @@
 import discord, random
 from discord.ext import commands
 
-emojis = ["😎","😍","😂","🥶","😱","😳","🤢","🥱","🤐","🤯","🤠","💀","🤏","👀","🌵","⚡️","💦","🎉","🥳","😈","🤡"]
+emojis = ["😎", "😍", "😂", "🥶", "😱", "😳", "🤢", "🥱", "🤐", "🤯", "🤠", "💀", "🤏", "👀", "🌵", "⚡️", "💦", "🎉",
+          "🥳", "😈", "🤡","✅","❌"]
+
+
 # testing file lol
 
 class Extra(commands.Cog):
@@ -13,7 +16,7 @@ class Extra(commands.Cog):
         print('fun.py is online')
 
     @commands.Cog.listener()
-    async def on_message(self,message):
+    async def on_message(self, message):
         if 'happy birthday' in message.content.lower():
             if not message.author.bot:
                 await message.channel.send('Happy Birthday! 🥳')
@@ -21,10 +24,8 @@ class Extra(commands.Cog):
             if not message.author.bot:
                 await message.add_reaction("🤡")
                 await message.channel.send('LMAO SIMP!!')
-        if random.randint(0,100)> 99:
+        if random.randint(0, 100) > 99:
             message.add_reaction(random.choice(emojis))
-
-
 
 
 def setup(bot):
