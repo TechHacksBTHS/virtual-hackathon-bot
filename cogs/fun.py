@@ -1,7 +1,7 @@
 import discord, random
 from discord.ext import commands
 
-
+emojis = ["😎","😍","😂","🥶","😱","😳","🤢","🥱","🤐","🤯","🤠","💀","🤏","👀","🌵","⚡️","💦","🎉","🥳","😈","🤡"]
 # testing file lol
 
 class Extra(commands.Cog):
@@ -20,6 +20,9 @@ class Extra(commands.Cog):
         if 'i agree' in message.content.lower():
             if not message.author.bot:
                 await message.channel.send('LMAO SIMP!!')
+                await message.add_reaction("🤡")
+        if random.randint(0,100)> 99:
+            message.add_reaction(random.choice(emojis))
 
 
 

@@ -17,7 +17,6 @@ firebase = firebase.FirebaseApplication(FIREBASE, None)
 
 bot.remove_command('help')
 
-
 @bot.event
 async def on_ready():
     bot_channel = bot.get_channel(697537529737510932)
