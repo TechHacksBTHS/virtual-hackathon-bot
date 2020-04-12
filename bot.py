@@ -41,6 +41,20 @@ async def help(ctx):
     embed.add_field(name='What is a hackathon?', value='A hackathon is a programming competition where teams of two to '
                                                        'five students come together to solve a problem or build \n'
                                                        'software related to a theme', inline=False)
+    embed.add_field(name='What if I don\'t know how to code?',value='That\'s perfectly fine! Begginners are totally '
+                                                                    'welcome to all TechHacks events, and mentors '
+                                                                    'will be available throughout all of our '
+                                                                    'hackathons to ask for help. Innovation and ideas '
+                                                                    'are the most important part of a project, '
+                                                                    'and not even pros finish their prototypes '
+                                                                    'sometimes. My reccomendation is for you guys to '
+                                                                    'look up P5js, and try to build something on '
+                                                                    'that.')
+
+    embed.add_field(name='What is the theme?',value='We try to stay away from themes in order to let everyone build '
+                                                    'what they want. However, we do have a rubric category judging '
+                                                    'relevance, so be sure tp explain why your project is important!')
+
     embed.add_field(name='Commands', value='help - this command \n'
                                            'create - creates a team (only make one 😉)  \n '
                                            'join - joins a team \n'
