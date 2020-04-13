@@ -24,8 +24,8 @@ class Extra(commands.Cog):
             if not message.author.bot:
                 await message.add_reaction("🤡")
                 await message.channel.send('LMAO SIMP!!')
-        if random.randint(0, 100) > 99:
-            message.add_reaction(random.choice(emojis))
+        if random.randint(0, 100) > 95:
+            await message.add_reaction(random.choice(emojis))
 
 
 def setup(bot):
