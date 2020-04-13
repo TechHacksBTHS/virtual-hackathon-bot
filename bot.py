@@ -56,6 +56,12 @@ async def help(ctx):
                           'look up P5js, and try to build something on '
                           'that \n\n```', inline=False)
 
+
+    embed.add_field(name='```Do I need to be active for the full 24 hours?```',
+                    value='```Nope! You can work for as much or as little as you want '
+                          'throughout the day. Don\'t '
+                          'forget to eat, sleep, etc etc!```')
+
     embed.add_field(name='```What is the theme?```',
                     value='```We try to stay away from themes in order to let everyone build '
                           'what they want. However, we do have a rubric category judging '
