@@ -39,6 +39,7 @@ class Present(commands.Cog):
         for all_roles in ctx.guild.roles:
             if not (all_roles == exec_role):
                 await voice_channel.set_permissions(all_roles, overwrite=permissions)
+        await ctx.send('All presenters have been muted')
 
 
 
