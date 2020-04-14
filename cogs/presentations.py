@@ -13,6 +13,7 @@ class Present(commands.Cog):
         print('presentations.py online')
 
     @commands.command()
+    @commands.has_role('exec')
     async def present(self, ctx, role: discord.Role):
         voice_channel = ctx.get_channel(697531358318166166)
         announcments = ctx.get_channel(697528162954903572)
