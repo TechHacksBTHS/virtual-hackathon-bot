@@ -76,7 +76,8 @@ class Teams(commands.Cog):
             await ctx.send(f'Team {role} already exists, pick a new name or do !join to join them!')
         else:
             new_col = random.choice(Colors)
-            await guild.create_role(name=role, color=new_col, hoist=True)
+            perms = discord.Permissions(send_messages=True,add_reactions=True)
+            await guild.create_role(name=role, color=new_col, hoist=True, permissions=perms)
             role = discord.utils.get(ctx.guild.roles, name=role)
             user = ctx.message.author
             await user.add_roles(role)
