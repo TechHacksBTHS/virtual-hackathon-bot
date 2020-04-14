@@ -25,9 +25,11 @@ async def on_ready():
     sunglasses = bot.get_emoji(698234865576968203)
     await bot.change_presence(
         # "you all code"
-        activity=discord.Activity(type=discord.ActivityType.watching, name="myself break over & over",
+        # "myself break over & over"
+        activity=discord.Activity(type=discord.ActivityType.watching, name="you all code",
                                   emoji=sunglasses))
-    await bot_channel.send('im awake senpai and ready to serve uwu')
+    # 'im awake senpai and ready to serve uwu'
+    await bot_channel.send('Ah yes, I have been professionally reloaded, thank you fine gentlemen')
     print('bot.py is active')
 
 
