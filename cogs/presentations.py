@@ -15,17 +15,17 @@ class Present(commands.Cog):
     @commands.command()
     @commands.has_role('exec')
     async def present(self, ctx, role: discord.Role):
-        voice_channel = ctx.get_channel(697531358318166166)
-        announcments = ctx.get_channel(697528162954903572)
+        voice_channel = ctx.guild.get_channel(697531358318166166)
+        announcments = ctx.guild.get_channel(697528162954903572)
         exec_role = ctx.get_role('exec')
-        permissions = discord.Permissions(speak=False)
-        pres_perms = discord.Permissions(speak=True)
+        permissions = discord.PermissionOverwrite(speak=False,stream=False)
+        pres_perms = discord.PermissionOverwrite(speak=True,stream=True)
         for all_roles in ctx.guild.roles:
 
             if not (all_roles == exec_role or all_roles == role):
-                voice_channel.set_permissions(permissions)
+                await self.bot.edit_channel_permissions(voice_channel.set_permissions, all_roles,permissions)
             else:
-                voice_channel.set_permissions(pres_perms)
+                await self.bot.edit_channel_permissions(voice_channel.set_permissions, all_roles,pres_permissions)
         await announcments.send(f'@everyone, team {role.mention} is now presenting! Show some respect and join the '
                                 f'#presentations voice channel! ;)')
 
