@@ -18,16 +18,30 @@ class Present(commands.Cog):
         voice_channel = ctx.guild.get_channel(697531358318166166)
         announcments = ctx.guild.get_channel(697528162954903572)
         exec_role = ctx.guild.get_role('exec')
-        permissions = discord.PermissionOverwrite(speak=False,stream=False)
-        pres_perms = discord.PermissionOverwrite(speak=True,stream=True)
+        permissions = discord.PermissionOverwrite(speak=False, stream=False)
+        pres_perms = discord.PermissionOverwrite(speak=True, stream=True)
         for all_roles in ctx.guild.roles:
 
             if not (all_roles == exec_role or all_roles == role):
-                await voice_channel.set_permissions(all_roles,overwrite=permissions)
+                await voice_channel.set_permissions(all_roles, overwrite=permissions)
             else:
-                await voice_channel.set_permissions(all_roles,overwrite=pres_perms)
-        await announcments.send(f'@everyone, team {role.mention} is now presenting! Show some respect and join the '
+                await voice_channel.set_permissions(all_roles, overwrite=pres_perms)
+        await announcments.send(f'(add in the @ after testing)everyone, team {role.mention} is now presenting! Show '
+                                f'some respect and join the '
                                 f'#presentations voice channel! ;)')
+
+    @commands.command()
+    @commands.has_role('exec')
+    async def hush(self, ctx):
+        permissions = discord.PermissionOverwrite(speak=False, stream=False)
+        pres_perms = discord.PermissionOverwrite(speak=True, stream=True)
+        exec_role = ctx.guild.get_role('exec')
+        voice_channel = ctx.guild.get_channel(697531358318166166)
+        for all_roles in ctx.guild.roles:
+            if not (all_roles == exec_role):
+                await voice_channel.set_permissions(all_roles, overwrite=permissions)
+            else:
+                await voice_channel.set_permissions(all_roles, overwrite=pres_perms)
 
 
 def setup(bot):
