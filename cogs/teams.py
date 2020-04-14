@@ -138,6 +138,7 @@ class Teams(commands.Cog):
                 all_roles.remove(participant_role)
 
             all_roles.remove(everyone_role)
+
             role = all_roles[0]
             user = ctx.message.author
             try:
@@ -241,7 +242,6 @@ class Teams(commands.Cog):
     #    await ctx.send('You are already on a team!')
     #    print(created_teams)
     """
-
 
 
 def setup(bot):
