@@ -17,7 +17,7 @@ class Present(commands.Cog):
     async def present(self, ctx, role: discord.Role):
         voice_channel = ctx.guild.get_channel(697531358318166166)
         announcments = ctx.guild.get_channel(697528162954903572)
-        exec_role = ctx.get_role('exec')
+        exec_role = ctx.guild.get_role('exec')
         permissions = discord.PermissionOverwrite(speak=False,stream=False)
         pres_perms = discord.PermissionOverwrite(speak=True,stream=True)
         for all_roles in ctx.guild.roles:
