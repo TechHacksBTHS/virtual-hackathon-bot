@@ -104,7 +104,7 @@ class Teams(commands.Cog):
         role = discord.utils.get(guild.roles, name=role)
         try:
             if participant_role in user.roles:
-                if role.members > 5:
+                if len(role.members) > 5:
                     await ctx.send(f'{role} already has 4 members')
                     return
                 await user.add_roles(role)
