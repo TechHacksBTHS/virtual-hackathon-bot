@@ -73,8 +73,8 @@ async def help(ctx):
                                                          'Amazon gift card while third and second place will receive '
                                                          'a TechHacks certificate```', inline=False)
     embed.add_field(name='```How will I submit my project?```',value='```We will open submissions with a platform called '
-                                                               'Devpost right before the hackathon ends',inline=False)
-    embed.add_field(name='How will judging work?',value='You\'ll have to present on our Discord server. There will be '
+                                                               'Devpost right before the hackathon ends```',inline=False)
+    embed.add_field(name='How will judging work?',value='```You\'ll have to present on our Discord server. There will be '
                                                         'a 5 minute time restriction on presentations, and our rubric '
                                                         'is avilable at: '
                                                         'https://docs.google.com/presentation/d/1ptT7K'
