@@ -191,8 +191,6 @@ class Teams(commands.Cog):
                 await role.delete()
         await self.all_teams(ctx)
         await ctx.send('All teams removed')
-
-
         all_created_teams = []
 
     @commands.command(name='test', hidden=True)
