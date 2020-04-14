@@ -25,7 +25,7 @@ class Present(commands.Cog):
             if not (all_roles == exec_role or all_roles == role):
                 await self.bot.edit_channel_permissions(voice_channel.set_permissions, all_roles,permissions)
             else:
-                await self.bot.edit_channel_permissions(voice_channel.set_permissions, all_roles,pres_permissions)
+                await self.bot.edit_channel_permissions(voice_channel.set_permissions, all_roles,pres_perms)
         await announcments.send(f'@everyone, team {role.mention} is now presenting! Show some respect and join the '
                                 f'#presentations voice channel! ;)')
 
