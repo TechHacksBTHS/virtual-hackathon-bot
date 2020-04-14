@@ -88,15 +88,18 @@ class Teams(commands.Cog):
             team_perms=discord.PermissionOverwrite(read_messages=True, view_channel=True, send_messages=True,speak=True,stream=True)
             embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
             await ctx.send(embed=embed)
-            await self.all_teams(ctx)
 
             # Text/Voice Channel for Teams
             await guild.create_text_channel(name=role_str,category='Team Chats',permissions=permissions)
             await guild.create_voice_channel(name=role_str,category='Team Chats',permissions=permissions)
-            team_txt = guild.get(guild.text_channels,name=role_str)
-            team_voice = guild.get(guild.voice_channels,name=role_str)
+            team_txt = discord.utils.get(guild.text_channels,name=role_str)
+            team_voice = discord.utils.get(guild.voice_channels,name=role_str)
             team_txt.set_permissions(role, team_perms)
             team_voice.set_permissions(role,team_perms)
+
+            # update join-teams:
+            await self.all_teams(ctx)
+
 
 
 
