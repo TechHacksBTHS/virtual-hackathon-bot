@@ -77,15 +77,27 @@ class Teams(commands.Cog):
             new_col = random.choice(Colors)
             perms = discord.Permissions(send_messages=True,add_reactions=True)
             await guild.create_role(name=role, color=new_col, hoist=True)
+            role_str=role
             role = discord.utils.get(ctx.guild.roles, name=role)
             user = ctx.message.author
             await user.add_roles(role)
             particpant = discord.utils.get(ctx.guild.roles, name='participant')
-            await role.edit(position=3)
+            await role.edit(position=2)
             await user.remove_roles(particpant)
+            permissions=discord.PermissionOverwrite(read_messages=False, view_channel=False, send_messages=False,speak=False,stream=False)
+            team_perms=discord.PermissionOverwrite(read_messages=True, view_channel=True, send_messages=True,speak=True,stream=True)
             embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
             await ctx.send(embed=embed)
             await self.all_teams(ctx)
+
+            # Text/Voice Channel for Teams
+            await guild.create_text_channel(name=role_str,category='Team Chats',permissions=permissions)
+            await guild.create_voice_channel(name=role_str,category='Team Chats',permissions=permissions)
+            team_txt = guild.get(guild.text_channels,name=role_str)
+            team_voice = guild.get(guild.voice_channels,name=role_str)
+            team_txt.set_permissions(role, team_perms)
+            team_voice.set_permissions(role,team_perms)
+
 
 
     @commands.command()
@@ -159,6 +171,8 @@ class Teams(commands.Cog):
         await self.bot.wait_until_ready()
         guild = ctx.guild
         print(ctx.message.author)
+        team_txt = guild.get(guild.text_channels, name=role)
+        team_voice = guild.get(guild.voice_channels, name=role)
         role = discord.utils.get(guild.roles, name=role)
         participant_role = get(guild.roles,name='participant')
         if role:
@@ -170,6 +184,9 @@ class Teams(commands.Cog):
                     member = i
                     print(i)
                     await member.add_roles(participant_role)
+
+                await team_txt.delete(reason='!removed')
+                await team_voice.delete(reason='!removed')
                 await role.delete()
                 await ctx.send(embed=embed)
                 await self.all_teams(ctx)
@@ -188,6 +205,10 @@ class Teams(commands.Cog):
             if not role.permissions.change_nickname:
                 for i in role.members:
                     await i.add_roles(participant_role)
+                team_txt = guild.get(guild.text_channels, name=role)
+                team_voice = guild.get(guild.voice_channels, name=role)
+                await team_txt.delete(reason='!purged')
+                await team_voice.delete(reason='!purged')
                 await role.delete()
         await self.all_teams(ctx)
         await ctx.send('All teams removed')
