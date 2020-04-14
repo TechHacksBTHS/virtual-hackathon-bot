@@ -1,10 +1,11 @@
 # bot.py
-import os, json, base64
+# this project was designed by Daniel Kogan, who can be reached at daniel@techhacks.nyc, or dkogan7191@bths.edu
+
+import os
 from firebase import firebase
 
 import discord, random
 from dotenv import load_dotenv
-from discord import Member
 
 load_dotenv()
 from discord.ext import commands
@@ -55,7 +56,6 @@ async def help(ctx):
                           'sometimes. My recommendation is for you guys to '
                           'look up P5js, and try to build something on '
                           'that \n\n```', inline=False)
-
 
     embed.add_field(name='```Do I need to be active for the full 24 hours?```',
                     value='```Nope! You can work for as much or as little as you want '
