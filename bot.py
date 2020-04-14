@@ -67,19 +67,20 @@ async def help(ctx):
                           'what they want. However, we do have a rubric category judging '
                           'relevance, so be sure to explain why your project is important! '
                           '\n\n```', inline=False)
-    embed.add_field(name='```Is there a prize?```',value='You betcha! The grand prize winner will receive a 25$ '
+    embed.add_field(name='```Is there a prize?```',value='```You betcha! The grand prize winner will receive a 25$ '
                                                          'Amazon gift card while third and second place will receive '
-                                                         'a TechHacks certificate', inline=False)
-    embed.add_field(name='How will I submit my project?',value='We will open submissions with a platform called '
+                                                         'a TechHacks certificate```', inline=False)
+    embed.add_field(name='```How will I submit my project?```',value='```We will open submissions with a platform called '
                                                                'Devpost right before the hackathon ends',inline=False)
     embed.add_field(name='How will judging work?',value='You\'ll have to present on our Discord server. There will be '
                                                         'a 5 minute time restriction on presentations, and our rubric '
                                                         'is avilable at: '
-                                                        'https://docs.google.com/presentation/d/1ptT7K-pjaS53YSj_GtGqF85uk5RrsbR-UywSpjb2bIM/edit?usp=sharing')
-    embed.add_field(name='I don’t have a team! Help!',value='Make sure to ask around on #team-formation! A team '
+                                                        'https://docs.google.com/presentation/d/1ptT7K'
+                                                        '-pjaS53YSj_GtGqF85uk5RrsbR-UywSpjb2bIM/edit?usp=sharing  ```')
+    embed.add_field(name='```I don’t have a team! Help!```',value='```Make sure to ask around on #team-formation! A team '
                                                             'should be around 3 to 4 students so someone might have '
                                                             'an empty space! Also, reach out to an organizer on the '
-                                                            'Discord server.',inline=False)
+                                                            'Discord server.```',inline=False)
     embed.add_field(name='```Commands```', value='```css\nhelp - this command \n'
                                                  'create - creates a team (only make one 😉) \n'
                                                  'join - joins a team \n'
