@@ -63,7 +63,7 @@ class Teams(commands.Cog):
 
     @commands.command(name='create')
     @commands.has_role('participant')
-    async def create(self, ctx, *, role):
+    async def create(self, ctx, *, role: commands.clean_content):
         await self.bot.wait_until_ready()
         role = str(role)
         print(role)
@@ -89,7 +89,7 @@ class Teams(commands.Cog):
 
 
     @commands.command()
-    async def join(self, ctx, *, role):
+    async def join(self, ctx, *, role: commands.clean_content):
         await self.bot.wait_until_ready()
         role = str(role)
         user = ctx.message.author
@@ -154,7 +154,7 @@ class Teams(commands.Cog):
 
     @commands.command()
     @commands.has_role('exec')
-    async def remove(self, ctx, *, role):
+    async def remove(self, ctx, *, role: commands.clean_content):
         await self.bot.wait_until_ready()
         guild = ctx.guild
         print(ctx.message.author)
