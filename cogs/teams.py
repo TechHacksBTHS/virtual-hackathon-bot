@@ -77,11 +77,12 @@ class Teams(commands.Cog):
         else:
             new_col = random.choice(Colors)
             perms = discord.Permissions(send_messages=True,add_reactions=True)
-            await guild.create_role(name=role, color=new_col, hoist=True, permissions=perms)
+            await guild.create_role(name=role, color=new_col, hoist=True)
             role = discord.utils.get(ctx.guild.roles, name=role)
             user = ctx.message.author
             await user.add_roles(role)
             particpant = discord.utils.get(ctx.guild.roles, name='participant')
+            await role.edit(position=3)
             await user.remove_roles(particpant)
             embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
             await ctx.send(embed=embed)
