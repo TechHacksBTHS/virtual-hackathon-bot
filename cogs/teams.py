@@ -3,6 +3,7 @@ import discord, random, time
 from discord.ext import commands
 from discord.utils import get
 
+
 # todo display all users in a team
 
 # todo join teams by reacting to message
@@ -10,6 +11,7 @@ from discord.utils import get
 
 def unpack(s):
     return "\n".join(map(str, s))
+
 
 all_created_teams = []
 
@@ -32,13 +34,9 @@ Colors = [discord.Color.default(),
           ]
 
 
-
 class Teams(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-
-
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -68,40 +66,40 @@ class Teams(commands.Cog):
         role = str(role)
         print(role)
         guild = ctx.guild
-        if ('@' in role) or  ('#' in role) or ('http' in role) or ('.' in role):
-                await ctx.send(f'That is an illegal name, names cannot include \'.\', \'@\',\'#\' or \'http\'. Capishe {ctx.author.mention}?')
-                return
-        elif (get(ctx.guild.roles,name=role)) in ctx.guild.roles:
+        if ('@' in role) or ('#' in role) or ('http' in role) or ('.' in role):
+            await ctx.send(
+                f'That is an illegal name, names cannot include \'.\', \'@\',\'#\' or \'http\'. Capishe {ctx.author.mention}?')
+            return
+        elif (get(ctx.guild.roles, name=role)) in ctx.guild.roles:
             await ctx.send(f'Team {role} already exists, pick a new name or do !join to join them!')
         else:
             new_col = random.choice(Colors)
-            perms = discord.Permissions(send_messages=True,add_reactions=True)
+            perms = discord.Permissions(send_messages=True, add_reactions=True)
             await guild.create_role(name=role, color=new_col, hoist=True)
-            role_str=role
+            role_str = role
             role = discord.utils.get(ctx.guild.roles, name=role)
             user = ctx.message.author
             await user.add_roles(role)
             particpant = discord.utils.get(ctx.guild.roles, name='participant')
             await role.edit(position=2)
             await user.remove_roles(particpant)
-            permissions=discord.PermissionOverwrite(read_messages=False, view_channel=False, send_messages=False,speak=False,stream=False)
-            team_perms=discord.PermissionOverwrite(read_messages=True, view_channel=True, send_messages=True,speak=True,stream=True)
+            permissions = discord.PermissionOverwrite(read_messages=False, view_channel=False, send_messages=False,
+                                                      speak=False, stream=False)
+            team_perms = discord.PermissionOverwrite(read_messages=True, view_channel=True, send_messages=True,
+                                                     speak=True, stream=True)
             embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
             await ctx.send(embed=embed)
 
             # Text/Voice Channel for Teams
-            await guild.create_text_channel(name=role_str,category='Team Chats',permissions=permissions)
-            await guild.create_voice_channel(name=role_str,category='Team Chats',permissions=permissions)
-            team_txt = discord.utils.get(guild.text_channels,name=role_str)
-            team_voice = discord.utils.get(guild.voice_channels,name=role_str)
-            team_txt.set_permissions(role, team_perms)
-            team_voice.set_permissions(role,team_perms)
+            #await guild.create_text_channel(name=role_str, category='Team Chats', permissions=permissions)
+            #await guild.create_voice_channel(name=role_str, category='Team Chats', permissions=permissions)
+            #team_txt = discord.utils.get(guild.text_channels, name=role_str)
+            #team_voice = discord.utils.get(guild.voice_channels, name=role_str)
+            #team_txt.set_permissions(role, team_perms)
+            #team_voice.set_permissions(role, team_perms)
 
             # update join-teams:
             await self.all_teams(ctx)
-
-
-
 
     @commands.command()
     async def join(self, ctx, *, role: commands.clean_content):
@@ -111,9 +109,8 @@ class Teams(commands.Cog):
         guild = ctx.guild
 
         everyone_role = get(guild.roles, name='@everyone')
-        participant_role = get(guild.roles,name='participant')
+        participant_role = get(guild.roles, name='participant')
         all_roles = ctx.author.roles
-
 
         role = discord.utils.get(guild.roles, name=role)
         try:
@@ -134,16 +131,15 @@ class Teams(commands.Cog):
         except discord.Forbidden:
             await ctx.send('Sorry boss, that\'s way above my pay grade')
 
-
     @commands.command()
     async def leave(self, ctx):
         await self.bot.wait_until_ready()
         guild = ctx.guild
         exec_role = get(guild.roles, name='exec')
         everyone_role = get(guild.roles, name='@everyone')
-        participant_role = get(guild.roles,name='participant')
+        participant_role = get(guild.roles, name='participant')
         all_roles = ctx.author.roles
-        if 'participant' in all_roles :
+        if 'participant' in all_roles:
             await ctx.send(f'Cannot leave particpants {ctx.author.mention}')
 
         else:
@@ -167,17 +163,16 @@ class Teams(commands.Cog):
             except discord.Forbidden:
                 await ctx.send('Sorry boss, that\'s way above my pay grade')
 
-
     @commands.command()
     @commands.has_role('exec')
     async def remove(self, ctx, *, role: commands.clean_content):
         await self.bot.wait_until_ready()
         guild = ctx.guild
         print(ctx.message.author)
-        team_txt = discord.utils.get(guild.text_channels, name=role)
-        team_voice = discord.utils.get(guild.voice_channels, name=role)
+        #team_txt = discord.utils.get(guild.text_channels, name=role)  # TEAM TEXT CHANNEL
+        #team_voice = discord.utils.get(guild.voice_channels, name=role)  # TEAM VOICE CHANNEL
         role = discord.utils.get(guild.roles, name=role)
-        participant_role = get(guild.roles,name='participant')
+        participant_role = get(guild.roles, name='participant')
         if role:
             try:
                 col = role.color
@@ -188,8 +183,8 @@ class Teams(commands.Cog):
                     print(i)
                     await member.add_roles(participant_role)
 
-                await team_txt.delete(reason='!removed')
-                await team_voice.delete(reason='!removed')
+                #await team_txt.delete(reason='!removed')
+                #await team_voice.delete(reason='!removed')
                 await role.delete()
                 await ctx.send(embed=embed)
                 await self.all_teams(ctx)
@@ -203,30 +198,28 @@ class Teams(commands.Cog):
     async def purge(self, ctx):
         await self.bot.wait_until_ready()
         guild = ctx.guild
-        participant_role = get(guild.roles,name='participant')
+        participant_role = get(guild.roles, name='participant')
         for role in ctx.guild.roles:
             if not role.permissions.change_nickname:
                 for i in role.members:
                     await i.add_roles(participant_role)
-                team_txt = guild.get(guild.text_channels, name=role)
-                team_voice = guild.get(guild.voice_channels, name=role)
-                await team_txt.delete(reason='!purged')
-                await team_voice.delete(reason='!purged')
+                #team_txt = guild.get(guild.text_channels, name=role)
+                #team_voice = guild.get(guild.voice_channels, name=role)
+                #await team_txt.delete(reason='!purged')
+                #await team_voice.delete(reason='!purged')
                 await role.delete()
         await self.all_teams(ctx)
         await ctx.send('All teams removed')
         all_created_teams = []
 
     @commands.command(name='test', hidden=True)
-
-    async def test(self,ctx):
+    async def test(self, ctx):
         guild = ctx.guild
         everyone_role = get(guild.roles, name='@everyone')
         roles = ctx.author.roles
         if everyone_role in roles:
             roles.remove(everyone_role)
         print(ctx.send(roles))
-
 
     """
     @commands.command(name='oldcreate', hidden=True)
