@@ -7,7 +7,6 @@ from discord.utils import get
 
 # todo join teams by reacting to message
 
-# todo limit role creation to one role
 
 def unpack(s):
     return "\n".join(map(str, s))
@@ -87,8 +86,6 @@ class Teams(commands.Cog):
             embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
             await ctx.send(embed=embed)
             await self.all_teams(ctx)
-
-
 
 
     @commands.command()
