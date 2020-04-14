@@ -174,8 +174,8 @@ class Teams(commands.Cog):
         await self.bot.wait_until_ready()
         guild = ctx.guild
         print(ctx.message.author)
-        team_txt = guild.get(guild.text_channels, name=role)
-        team_voice = guild.get(guild.voice_channels, name=role)
+        team_txt = discord.utils.get(guild.text_channels, name=role)
+        team_voice = discord.utils.get(guild.voice_channels, name=role)
         role = discord.utils.get(guild.roles, name=role)
         participant_role = get(guild.roles,name='participant')
         if role:
