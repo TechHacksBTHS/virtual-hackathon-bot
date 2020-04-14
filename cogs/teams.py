@@ -146,7 +146,9 @@ class Teams(commands.Cog):
 
                 particpant = discord.utils.get(ctx.guild.roles, name='participant')
                 await user.add_roles(particpant)
-                await ctx.send(f'{ctx.author.mention} has left {role}')
+                col = role.color
+                embed = discord.Embed(title=f'{ctx.author} has left {role}', description='', color=col)
+                await ctx.send(embed=embed)
             except discord.Forbidden:
                 await ctx.send('Sorry boss, that\'s way above my pay grade')
 
