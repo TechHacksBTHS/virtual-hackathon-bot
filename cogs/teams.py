@@ -5,7 +5,7 @@ from discord.utils import get
 
 
 # todo display all users in a team
-
+# todo change team name
 # todo join teams by reacting to message
 
 
