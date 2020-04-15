@@ -17,13 +17,14 @@ class Present(commands.Cog):
     async def present(self, ctx, role: discord.Role):
         voice_channel = ctx.guild.get_channel(697531358318166166)
         announcments = ctx.guild.get_channel(697528162954903572)
+        techhacks_role = ctx.guild.get_role('TechHacks')
         exec_role = ctx.guild.get_role('exec')
         exec_perms = discord.Permissions.voice()
         permissions = discord.PermissionOverwrite(speak=False, stream=False)
         pres_perms = discord.PermissionOverwrite(speak=True, stream=True)
         for all_roles in ctx.guild.roles:
 
-            if not (all_roles == exec_role or all_roles == role):
+            if not (all_roles == exec_role or all_roles == role or all_roles==techhacks_role):
                 await voice_channel.set_permissions(all_roles, overwrite=permissions)
             else:
                 await voice_channel.set_permissions(all_roles, overwrite=pres_perms)
@@ -37,11 +38,12 @@ class Present(commands.Cog):
     @commands.has_role('exec')
     async def hush(self, ctx):
         permissions = discord.PermissionOverwrite(speak=False, stream=False)
+        techhacks_role = ctx.guild.get_role('TechHacks')
         exec_perms = discord.Permissions.voice()
         exec_role = ctx.guild.get_role('exec')
         voice_channel = ctx.guild.get_channel(697531358318166166)
         for all_roles in ctx.guild.roles:
-            if not (all_roles == exec_role):
+            if not (all_roles == exec_role or all_roles==techhacks_role):
                 await voice_channel.set_permissions(all_roles, overwrite=permissions)
 
         await voice_channel.set_permissions(exec_role,exec_perms)
