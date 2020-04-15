@@ -1,7 +1,7 @@
 # virtual-hackathon-bot
 The TechHacks discord bot, hosted on our server for virtual hackathons at https://discord.gg/Du3J2yh
 
-# Commands
+# Custom Commands
 
 !create teamname --> creates a team with name teamname
 
@@ -18,7 +18,11 @@ The TechHacks discord bot, hosted on our server for virtual hackathons at https:
 !hush --> removes all streaming and speaking permissions in #presentations
 
 
+# Basic Commands
+
 
 !kick @user
+
 !ban @user
+
 !unban @user
