@@ -27,6 +27,7 @@ class Extra(commands.Cog):
         if not message.channel == self.bot.get_channel(697528022307176521):
             if random.randint(0, 100) > 97:
                 await message.add_reaction(random.choice(emojis))
+        await bot.process_commands(message)
 
 
 def setup(bot):

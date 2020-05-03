@@ -29,7 +29,7 @@ async def on_ready():
         activity=discord.Activity(type=discord.ActivityType.watching, name="you all code",
                                   emoji=sunglasses))
     # 'im awake senpai and ready to serve uwu'
-    await bot_channel.send('Ah yes, I have been professionally reloaded, thank you fine gentlemen')
+    # await bot_channel.send('Ah yes, I have been professionally reloaded, thank you fine gentlemen')
     print('bot.py is active')
 
 
