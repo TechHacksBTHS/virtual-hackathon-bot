@@ -61,7 +61,7 @@ class Exec(commands.Cog):
                            f' they will not allow me to do that')
             return
         elif isinstance(error, commands.CommandNotFound):
-            await ctx.add_reaction("😳")
+            await ctx.message.add_reaction("😳")
             await ctx.send('404 Command Not Found')
         elif isinstance(error, commands.MissingRole):
             await ctx.send('You already have a team silly!')
