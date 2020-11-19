@@ -4,10 +4,16 @@ from discord.ext import commands
 from discord.utils import get
 
 
-# todo display all users in a team
-# todo change team name
-# todo join teams by reacting to message
+# TODO display all users in a team
+# TODO change team name
+# TODO join teams by reacting to message
 
+# STUFF THAT NEEDS TO BE DONE OVER THE WEEKEND
+# TODO Create team channels on team create
+# TODO stop the bugs with creating a team
+# TODO filter out non-hackathon participants
+# TODO presentation feature needs wayyyy more testing
+# TODO CHANGE_NICKNAME FILTER FOR LEAVING TEAM
 
 def unpack(s):
     return "\n".join(map(str, s))
@@ -149,8 +155,9 @@ class Teams(commands.Cog):
                 all_roles.remove(participant_role)
 
             all_roles.remove(everyone_role)
-
-            role = all_roles[0]
+            # TODO
+            role = all_roles[0] #instead of removing first role, remove the filters and just remove any role without a change_nickname permission
+            
             user = ctx.message.author
             try:
                 await user.remove_roles(role)
