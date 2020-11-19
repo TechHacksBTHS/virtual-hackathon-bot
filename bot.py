@@ -132,7 +132,7 @@ async def reload(ctx):
 
 
 for filename in os.listdir('./cogs'):
-    if filename.endswith('.py') and not filename.startswith('teams'):  #remove second half of and in order to load the teams file
+    if filename.endswith('.py'): # and not filename.startswith('teams'):  #remove second half of and in order to load the teams file
         bot.load_extension(f'cogs.{filename[:-3]}')
 
 bot.run(TOKEN)
