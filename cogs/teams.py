@@ -65,7 +65,6 @@ class Teams(commands.Cog):
         await channel.send(embed=embed)
 
     @commands.command(name='create')
-    @commands.has_role('participant')
     async def create(self, ctx, *, role: commands.clean_content):
         await self.bot.wait_until_ready()
         particpant = ctx.get_role(697533967859187803)
@@ -82,7 +81,7 @@ class Teams(commands.Cog):
             await ctx.send("You are already in a team buddy, sorry")
         else:
             new_col = random.choice(Colors)
-            perms = discord.Permissions(send_messages=True, add_reactions=True)
+            #perms = discord.Permissions(send_messages=True, add_reactions=True)
             await guild.create_role(name=role, color=new_col, hoist=True)
             role_str = role
             role = discord.utils.get(ctx.guild.roles, name=role)
