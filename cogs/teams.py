@@ -88,7 +88,7 @@ class Teams(commands.Cog):
             await role.edit(position=2)
             await user.remove_roles(particpant)
             permissions = discord.PermissionOverwrite(read_messages=False, view_channel=False, send_messages=False,
-                                                      speak=False, stream=False,read_message_history=False)
+                                                      speak=False, stream=False,read_message_history=False, connect=False)
             
             team_perms = discord.PermissionOverwrite(read_messages=True, view_channel=True, send_messages=True,
                                                      speak=True, stream=True, read_message_history=True)
@@ -99,10 +99,13 @@ class Teams(commands.Cog):
             # ------------------------- team channels -------------------------        
             guild = ctx.guild
             team_cat = guild.get_channel(699729155301834762)
+            #text_perms = discord.PermissionOverwrite(read_messages=False)
             team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
             team_vc = await guild.create_voice_channel(role_str,category=team_cat, permissions=permissions)
             await team_txt.set_permissions(role, overwrite=team_perms)
             await team_vc.set_permissions(role, overwrite=team_perms)
+            
+            
             
             # Text/Voice Channel for Teams
             #await guild.create_text_channel(name=role_str, category='Team Chats', permissions=permissions)
