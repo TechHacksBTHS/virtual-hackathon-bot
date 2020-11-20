@@ -68,6 +68,7 @@ class Teams(commands.Cog):
     @commands.has_role('participant')
     async def create(self, ctx, *, role: commands.clean_content):
         await self.bot.wait_until_ready()
+        particpant = discord.utils.get(ctx.guild.roles, name='participant')
         role = str(role)
         print(role)
         guild = ctx.guild
@@ -77,6 +78,8 @@ class Teams(commands.Cog):
             return
         elif (get(ctx.guild.roles, name=role)) in ctx.guild.roles:
             await ctx.send(f'Team {role} already exists, pick a new name or do !join to join them!')
+        elif particpant not in ctx.user.roles:
+            await ctx.send("You are already in a team buddy, sorry")
         else:
             new_col = random.choice(Colors)
             perms = discord.Permissions(send_messages=True, add_reactions=True)
@@ -85,7 +88,6 @@ class Teams(commands.Cog):
             role = discord.utils.get(ctx.guild.roles, name=role)
             user = ctx.message.author
             await user.add_roles(role)
-            particpant = discord.utils.get(ctx.guild.roles, name='participant')
             await role.edit(position=2)
             await user.remove_roles(particpant)
             permissions = discord.PermissionOverwrite(read_messages=False, view_channel=False, send_messages=False,
