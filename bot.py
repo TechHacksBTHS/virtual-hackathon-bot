@@ -105,6 +105,15 @@ async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, id=697533967859187803)
     await member.add_roles(role)
 
+@bot.event
+async def on_reaction_add(reaction, user):
+    roleChannelId = 779360821490221067
+
+    if reaction.message.channel.id != roleChannelId:
+        return  # So it only happens in the specified channel
+    if user.reaction.emoji == "✋":
+        Technight2020 = discord.utils.get(user.server.roles, name="Technight 2020")
+        await bot.add_roles(user, Technight2020)
 
 @bot.command(hidden=True)
 @commands.has_role('exec')
