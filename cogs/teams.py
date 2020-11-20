@@ -191,8 +191,8 @@ class Teams(commands.Cog):
         await self.bot.wait_until_ready()
         guild = ctx.guild
         print(ctx.message.author)
-        #team_txt = discord.utils.get(guild.text_channels, name=role)  # TEAM TEXT CHANNEL
-        #team_voice = discord.utils.get(guild.voice_channels, name=role)  # TEAM VOICE CHANNEL
+        team_txt = discord.utils.get(guild.text_channels, name=role)  # TEAM TEXT CHANNEL
+        team_voice = discord.utils.get(guild.voice_channels, name=role)  # TEAM VOICE CHANNEL
         role = discord.utils.get(guild.roles, name=role)
         participant_role = get(guild.roles, name='participant')
         if role:
@@ -205,8 +205,8 @@ class Teams(commands.Cog):
                     print(i)
                     await member.add_roles(participant_role)
 
-                #await team_txt.delete(reason='!removed')
-                #await team_voice.delete(reason='!removed')
+                await team_txt.delete(reason='!removed')
+                await team_voice.delete(reason='!removed')
                 await role.delete()
                 await ctx.send(embed=embed)
                 await self.all_teams(ctx)
@@ -220,6 +220,7 @@ class Teams(commands.Cog):
     async def purge(self, ctx):
         await self.bot.wait_until_ready()
         guild = ctx.guild
+        team_cat = guild.get_channel(699729155301834762)
         participant_role = get(guild.roles, name='participant')
         for role in ctx.guild.roles:
             if not role.permissions.change_nickname:
@@ -229,7 +230,14 @@ class Teams(commands.Cog):
                 #team_voice = guild.get(guild.voice_channels, name=role)
                 #await team_txt.delete(reason='!purged')
                 #await team_voice.delete(reason='!purged')
-                await role.delete()
+                await role.delete(reason='purged')
+        
+        for channel in ctx.guild.text_channels:
+            if channel.category == team_cat:
+                await channel.delete(reason='purged')
+        for channel in ctx.guild.voice_channels:
+            if channel.category == team_cat:
+                await channel.delete(reason='purged')
         await self.all_teams(ctx)
         await ctx.send('All teams removed')
         all_created_teams = []
