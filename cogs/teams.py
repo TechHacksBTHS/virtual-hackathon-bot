@@ -157,7 +157,7 @@ class Teams(commands.Cog):
             all_roles.remove(everyone_role)
             
             for i in all_roles:
-                if not role.permissions.change_nickname:
+                if not i.permissions.change_nickname:
                     role = i #instead of removing first role, remove the filters and just remove any role without a change_nickname permission
             
             user = ctx.message.author
