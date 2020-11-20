@@ -223,12 +223,8 @@ class Teams(commands.Cog):
     @commands.command(name='test', hidden=True)
     async def test(self, ctx):
         guild = ctx.guild
-        everyone_role = get(guild.roles, name='@everyone')
-        roles = ctx.author.roles
-        if everyone_role in roles:
-            roles.remove(everyone_role)
-        print(ctx.send(roles))
-
+        channel = guild.create_text_channel('test')
+        
     """
     @commands.command(name='oldcreate', hidden=True)
     async def oldcreate(self, ctx, *, role):
