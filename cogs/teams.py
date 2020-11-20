@@ -78,7 +78,7 @@ class Teams(commands.Cog):
             return
         elif (get(ctx.guild.roles, name=role)) in ctx.guild.roles:
             await ctx.send(f'Team {role} already exists, pick a new name or do !join to join them!')
-        elif particpant not in ctx.user.roles:
+        elif particpant not in ctx.author.roles:
             await ctx.send("You are already in a team buddy, sorry")
         else:
             new_col = random.choice(Colors)
