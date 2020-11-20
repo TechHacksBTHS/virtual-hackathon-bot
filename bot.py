@@ -9,15 +9,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 from discord.ext import commands
+intents = discord.Intents.all()
 
-bot = commands.Bot(command_prefix='!', description='owo i sure do L-O-V-E programming')
+bot = commands.Bot(command_prefix='!', description='owo i sure do L-O-V-E programming', intents=intents)
 TOKEN = os.environ.get('TOKEN')
 FIREBASE = os.environ.get('FIREBASE', 3)
 FIREBASE_NAME = os.environ.get('FIREBASE_NAME', 3)
 firebase = firebase.FirebaseApplication(FIREBASE, None)
 
 bot.remove_command('help')
-
 
 @bot.event
 async def on_ready():
@@ -102,7 +102,7 @@ async def ping(ctx):
 
 @bot.event
 async def on_member_join(member):
-    role = discord.utils.get(member.guild.roles, name='participant')
+    role = discord.utils.get(member.guild.roles, id=697533967859187803)
     await member.add_roles(role)
 
 
