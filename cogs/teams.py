@@ -13,7 +13,6 @@ from discord.utils import get
 # TODO stop the bugs with creating a team
 # TODO filter out non-hackathon participants
 # TODO presentation feature needs wayyyy more testing
-# TODO CHANGE_NICKNAME FILTER FOR LEAVING TEAM
 
 def unpack(s):
     return "\n".join(map(str, s))
