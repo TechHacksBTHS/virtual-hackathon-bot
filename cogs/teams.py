@@ -65,10 +65,10 @@ class Teams(commands.Cog):
         await channel.send(embed=embed)
 
     @commands.command(name='create')
+    @commands.has_role('participant')
     async def create(self, ctx, *, role: commands.clean_content):
         await self.bot.wait_until_ready()
         particpant = ctx.guild.get_role(697533967859187803)
-        await ctx.send(f'{ctx.author.roles}')
         role = str(role)
         print(role)
         guild = ctx.guild
@@ -97,10 +97,11 @@ class Teams(commands.Cog):
             embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
             await ctx.send(embed=embed)
                     
+            # ------------------------- team channels -------------------------        
             guild = ctx.guild
-            #team_cat = guild.get_channel(699729155301834762)
-            #team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
-            #team_vc = await guild.create_voice_channel(role_str,category=team_cat, permissions=permissions)
+            team_cat = guild.get_channel(699729155301834762)
+            team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
+            team_vc = await guild.create_voice_channel(role_str,category=team_cat, permissions=permissions)
             
             
             
