@@ -68,6 +68,7 @@ class Teams(commands.Cog):
     async def create(self, ctx, *, role: commands.clean_content):
         await self.bot.wait_until_ready()
         particpant = ctx.guild.get_role(697533967859187803)
+        await ctx.send(f'{ctx.author.roles}')
         role = str(role)
         print(role)
         guild = ctx.guild
