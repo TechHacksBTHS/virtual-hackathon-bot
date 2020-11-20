@@ -223,7 +223,8 @@ class Teams(commands.Cog):
     @commands.command(name='test', hidden=True)
     async def test(self, ctx):
         guild = ctx.guild
-        channel = guild.create_text_channel('test')
+        channel = await guild.create_text_channel('test')
+        await ctx.send("team channel made")
         
     """
     @commands.command(name='oldcreate', hidden=True)
