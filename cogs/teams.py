@@ -94,7 +94,11 @@ class Teams(commands.Cog):
                                                      speak=True, stream=True)
             embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
             await ctx.send(embed=embed)
-
+                    
+            guild = ctx.guild
+            team_cat = guild.get_channel(699729155301834762)
+            team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
+            team_vc = await guild.create_voice_channel(role_str,category=team_cat,permissions=permissions)
             # Text/Voice Channel for Teams
             #await guild.create_text_channel(name=role_str, category='Team Chats', permissions=permissions)
             #await guild.create_voice_channel(name=role_str, category='Team Chats', permissions=permissions)
@@ -224,9 +228,10 @@ class Teams(commands.Cog):
     async def test(self, ctx):
         guild = ctx.guild
         team_cat = guild.get_channel(699729155301834762)
-        team_txt = await guild.create_text_channel('test',category=team_cat)
-        team_vc = await guild.create_voice_channel('test',category=team_cat)
+        team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
+        team_vc = await guild.create_voice_channel(role_str,category=team_cat,permissions=permissions)
         await ctx.send("team channel made")
+        
         
     """
     @commands.command(name='oldcreate', hidden=True)
