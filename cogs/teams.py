@@ -67,7 +67,7 @@ class Teams(commands.Cog):
     @commands.command(name='create')
     async def create(self, ctx, *, role: commands.clean_content):
         await self.bot.wait_until_ready()
-        particpant = ctx.get_role(697533967859187803)
+        particpant = ctx.guild.get_role(697533967859187803)
         role = str(role)
         print(role)
         guild = ctx.guild
