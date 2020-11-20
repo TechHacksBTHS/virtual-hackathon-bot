@@ -21,14 +21,14 @@ bot.remove_command('help')
 
 @bot.event
 async def on_ready():
-    bot_channel = bot.get_channel(697537529737510932)
+    bot_channel = bot.get_channel(779380419153363004)
     sunglasses = bot.get_emoji(698234865576968203)
     await bot.change_presence(
         # "you all code"
         # "myself break over & over"
         activity=discord.Activity(type=discord.ActivityType.watching, name="you all code",
                                   emoji=sunglasses))
-    # 'im awake senpai and ready to serve uwu'
+    await bot_channel.send('im awake senpai and ready to serve uwu')
     # await bot_channel.send('Ah yes, I have been professionally reloaded, thank you fine gentlemen')
     print('bot.py is active')
 
