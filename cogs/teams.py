@@ -83,7 +83,7 @@ class Teams(commands.Cog):
             role = await guild.create_role(name=role, color=new_col, hoist=True)
             user = ctx.message.author
             await user.add_roles(role)
-            await role.edit(position=2)
+            await role.edit(position=3)
             await user.remove_roles(particpant)
             permissions = discord.PermissionOverwrite(read_messages=False, view_channel=False, send_messages=False,
                                                       speak=False, stream=False,read_message_history=False, connect=False)
