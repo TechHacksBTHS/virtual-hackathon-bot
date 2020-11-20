@@ -78,14 +78,11 @@ class Teams(commands.Cog):
             return
         elif (get(ctx.guild.roles, name=role)) in ctx.guild.roles:
             await ctx.send(f'Team {role} already exists, pick a new name or do !join to join them!')
-        elif particpant not in ctx.author.roles:
-            await ctx.send("You are already in a team buddy, sorry")
         else:
             new_col = random.choice(Colors)
             #perms = discord.Permissions(send_messages=True, add_reactions=True)
-            await guild.create_role(name=role, color=new_col, hoist=True)
             role_str = role
-            role = discord.utils.get(ctx.guild.roles, name=role)
+            role = await guild.create_role(name=role, color=new_col, hoist=True)
             user = ctx.message.author
             await user.add_roles(role)
             await role.edit(position=2)
@@ -104,10 +101,8 @@ class Teams(commands.Cog):
             team_cat = guild.get_channel(699729155301834762)
             team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
             team_vc = await guild.create_voice_channel(role_str,category=team_cat, permissions=permissions)
-            await team_txt.set_permissions(role, overwrite=team_perms)
-            await team_vc.set_permissions(role, overwrite=team_perms)
-            
-            
+            await team_txt.set_permissions(role, permissions=team_perms)
+            await team_vc.set_permissions(role, permissions=team_perms)
             
             # Text/Voice Channel for Teams
             #await guild.create_text_channel(name=role_str, category='Team Chats', permissions=permissions)
@@ -171,7 +166,7 @@ class Teams(commands.Cog):
             
             for i in all_roles:
                 if not i.permissions.change_nickname:
-                    role = i #instead of removing first role, remove the filters and just remove any role without a change_nickname permission
+                    role = i 
             
             user = ctx.message.author
             try:
@@ -226,10 +221,6 @@ class Teams(commands.Cog):
             if not role.permissions.change_nickname:
                 for i in role.members:
                     await i.add_roles(participant_role)
-                #team_txt = guild.get(guild.text_channels, name=role)
-                #team_voice = guild.get(guild.voice_channels, name=role)
-                #await team_txt.delete(reason='!purged')
-                #await team_voice.delete(reason='!purged')
                 await role.delete(reason='purged')
         
         for channel in ctx.guild.text_channels:
@@ -245,10 +236,7 @@ class Teams(commands.Cog):
     @commands.command(name='test', hidden=True)
     async def test(self, ctx):
         guild = ctx.guild
-        team_cat = guild.get_channel(699729155301834762)
-        team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
-        team_vc = await guild.create_voice_channel(role_str,category=team_cat,permissions=permissions)
-        await ctx.send("team channel made")
+        
 
 
 def setup(bot):
