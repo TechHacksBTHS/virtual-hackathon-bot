@@ -98,9 +98,13 @@ class Teams(commands.Cog):
             await ctx.send(embed=embed)
                     
             guild = ctx.guild
-            team_cat = guild.get_channel(699729155301834762)
-            team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
-            team_vc = await guild.create_voice_channel(role_str,category=team_cat,permissions=permissions)
+            #team_cat = guild.get_channel(699729155301834762)
+            #team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
+            #team_vc = await guild.create_voice_channel(role_str,category=team_cat,permissions=permissions)
+            
+            
+            
+            
             # Text/Voice Channel for Teams
             #await guild.create_text_channel(name=role_str, category='Team Chats', permissions=permissions)
             #await guild.create_voice_channel(name=role_str, category='Team Chats', permissions=permissions)
@@ -233,44 +237,6 @@ class Teams(commands.Cog):
         team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
         team_vc = await guild.create_voice_channel(role_str,category=team_cat,permissions=permissions)
         await ctx.send("team channel made")
-        
-        
-    """
-    @commands.command(name='oldcreate', hidden=True)
-    async def oldcreate(self, ctx, *, role):
-        created_teams = []
-        print(ctx.guild.roles)
-
-        for role in ctx.guild.roles:
-            if not role.permissions.change_nickname:
-                await ctx.send(role)
-
-                created_teams.append(role)
-                if ctx.author in role.members:
-                    work = False
-                else:
-                    work = True
-
-        guild = ctx.guild
-        new_col = random.choice(Colors)
-        if ('@' or 'participant' or 'TechHacks' or 'everyone' or '#' or 'http' or '.') in role or (
-               role in created_teams):
-               await ctx.send(f'frick off {ctx.author.mention}')
-        else:
-            await guild.create_role(name=role, color=new_col, hoist=True)
-            role = guild.get_role(name=role)
-            user = ctx.message.author
-            await user.add_roles(role)
-            embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
-            await ctx.send(embed=embed)
-
-            await self.all_teams(ctx)
-            print(created_teams)
-
-    #else:
-    #    await ctx.send('You are already on a team!')
-    #    print(created_teams)
-    """
 
 
 def setup(bot):
