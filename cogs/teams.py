@@ -100,7 +100,7 @@ class Teams(commands.Cog):
             guild = ctx.guild
             #team_cat = guild.get_channel(699729155301834762)
             #team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
-            #team_vc = await guild.create_voice_channel(role_str,category=team_cat,permissions=permissions)
+            #team_vc = await guild.create_voice_channel(role_str,category=team_cat, permissions=permissions)
             
             
             
