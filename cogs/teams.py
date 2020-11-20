@@ -101,8 +101,8 @@ class Teams(commands.Cog):
             team_cat = guild.get_channel(699729155301834762)
             team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
             team_vc = await guild.create_voice_channel(role_str,category=team_cat, permissions=permissions)
-            await team_txt.set_permissions(role, permissions=team_perms)
-            await team_vc.set_permissions(role, permissions=team_perms)
+            await team_txt.set_permissions(role, overwrite=team_perms)
+            await team_vc.set_permissions(role, overwrite=team_perms)
             
             # Text/Voice Channel for Teams
             #await guild.create_text_channel(name=role_str, category='Team Chats', permissions=permissions)
@@ -129,8 +129,8 @@ class Teams(commands.Cog):
         role = discord.utils.get(guild.roles, name=role)
         try:
             if participant_role in user.roles:
-                if len(role.members) > 5:
-                    await ctx.send(f'{role} already has 4 members')
+                if len(role.members) > 7:
+                    await ctx.send(f'{role} already has 6 members')
                     return
                 await user.add_roles(role)
                 await user.remove_roles(participant_role)
