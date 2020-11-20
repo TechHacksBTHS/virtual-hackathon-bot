@@ -91,9 +91,9 @@ class Teams(commands.Cog):
             await role.edit(position=2)
             await user.remove_roles(particpant)
             permissions = discord.PermissionOverwrite(read_messages=False, view_channel=False, send_messages=False,
-                                                      speak=False, stream=False)
+                                                      speak=False, stream=False,read_message_history=False)
             team_perms = discord.PermissionOverwrite(read_messages=True, view_channel=True, send_messages=True,
-                                                     speak=True, stream=True)
+                                                     speak=True, stream=True, read_message_history=True)
             embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
             await ctx.send(embed=embed)
                     
