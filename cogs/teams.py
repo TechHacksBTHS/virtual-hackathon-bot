@@ -224,7 +224,8 @@ class Teams(commands.Cog):
     async def test(self, ctx):
         guild = ctx.guild
         team_cat = guild.get_channel(699729155301834762)
-        channel = await guild.create_text_channel('test',category=team_cat)
+        team_txt = await guild.create_text_channel('test',category=team_cat)
+        team_vc = await guild.create_voice_channel('test',category=team_cat)
         await ctx.send("team channel made")
         
     """
