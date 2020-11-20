@@ -9,7 +9,6 @@ from discord.utils import get
 # TODO join teams by reacting to message
 
 # STUFF THAT NEEDS TO BE DONE OVER THE WEEKEND
-# TODO Create team channels on team create
 # TODO stop the bugs with creating a team
 # TODO filter out non-hackathon participants
 # TODO presentation feature needs wayyyy more testing
@@ -80,7 +79,6 @@ class Teams(commands.Cog):
             await ctx.send(f'Team {role} already exists, pick a new name or do !join to join them!')
         else:
             new_col = random.choice(Colors)
-            #perms = discord.Permissions(send_messages=True, add_reactions=True)
             role_str = role
             role = await guild.create_role(name=role, color=new_col, hoist=True)
             user = ctx.message.author
@@ -99,21 +97,10 @@ class Teams(commands.Cog):
             # ------------------------- team channels -------------------------        
             guild = ctx.guild
             team_cat = guild.get_channel(699729155301834762)
-            #text_perms = discord.PermissionOverwrite(read_messages=False)
             team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
             team_vc = await guild.create_voice_channel(role_str,category=team_cat, permissions=permissions)
             await team_txt.set_permissions(role, overwrite=team_perms)
             await team_vc.set_permissions(role, overwrite=team_perms)
-            
-            
-            
-            # Text/Voice Channel for Teams
-            #await guild.create_text_channel(name=role_str, category='Team Chats', permissions=permissions)
-            #await guild.create_voice_channel(name=role_str, category='Team Chats', permissions=permissions)
-            #team_txt = discord.utils.get(guild.text_channels, name=role_str)
-            #team_voice = discord.utils.get(guild.voice_channels, name=role_str)
-            #team_txt.set_permissions(role, team_perms)
-            #team_voice.set_permissions(role, team_perms)
 
             # update join-teams:
             await self.all_teams(ctx)
