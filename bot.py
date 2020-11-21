@@ -71,7 +71,7 @@ async def help(ctx):
                           'In addtion, we do have a rubric category judging '
                           'relevance, so be sure to explain why your project is important! '
                           '\n\n```', inline=False)
-    embed.add_field(name='```Is there a prize?```',value='```You betcha! The theme prizes will receive a $100 '
+    embed.add_field(name='```Is there a prize?```',value='```You betcha! The theme prize first place will receive a $100 '
                                                          'gift card while second and third place will receive $60 to $40 dollars gift card respectively. '
                                                          'There are other prizes available as well!```', inline=False)
     embed.add_field(name='```How will I submit my project?```',value='```We will open submissions with a platform called '
