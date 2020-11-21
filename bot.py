@@ -45,7 +45,7 @@ async def help(ctx):
 
     embed.add_field(name='```What is a hackathon?```',
                     value='```A hackathon is a programming competition where teams of one to '
-                          'four students come together to solve a problem or build \n\n'
+                          'four students come together to solve a problem or build \n'
                           'software related to a theme```', inline=False)
 
     embed.add_field(name='```What if I don\'t know how to code?```',
@@ -66,9 +66,9 @@ async def help(ctx):
 
     embed.add_field(name='```What is the theme?```',
                     value='```The themes for this Hackathon are COVID-19 Pandemic, '
-                          'racial injustice, misinformation, and climate change. You can also create non-theme projects that will not be eligible for the theme prizes. '
+                          'racial injustice, misinformation, and climate change. You can also create non-theme projects that will not be eligible for theme prizes. '
                           'Check out the #slides for more information, or feel free to ping @exec. '
-                          'In addtion, we do have a rubric category judging '
+                          'In addition, we do have a rubric category judging '
                           'relevance, so be sure to explain why your project is important! '
                           '\n\n```', inline=False)
     embed.add_field(name='```Is there a prize?```',value='```You betcha! The theme prize first place will receive a $100 '
