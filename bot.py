@@ -59,19 +59,21 @@ async def help(ctx):
                           'look up P5js, and try to build something on '
                           'that \n\n```', inline=False)
 
-    embed.add_field(name='```Do I need to be active for the full 24 hours?```',
+    embed.add_field(name='```Do I need to be active for the full 48+ hours?```',
                     value='```Nope! You can work for as much or as little as you want '
                           'throughout the day. Don\'t '
                           'forget to eat, sleep, etc etc!```')
 
     embed.add_field(name='```What is the theme?```',
-                    value='```We try to stay away from themes in order to let everyone build '
-                          'what they want. However, we do have a rubric category judging '
+                    value='```The themes for this Hackathon are COVID-19 Pandemic, '
+                          'racial injustice, misinformation, and climate change. You can also create non-theme projects that will not be eligible for the theme prizes. '
+                          'Check out the #slides for more information, or feel free to ping @exec. '
+                          'In addtion, we do have a rubric category judging '
                           'relevance, so be sure to explain why your project is important! '
                           '\n\n```', inline=False)
-    embed.add_field(name='```Is there a prize?```',value='```You betcha! The grand prize winner will receive a 25$ '
-                                                         'Amazon gift card while third and second place will receive '
-                                                         'a TechHacks certificate```', inline=False)
+    embed.add_field(name='```Is there a prize?```',value='```You betcha! The theme prizes will receive a $100 '
+                                                         'gift card while second and third place will receive $60 to $40 dollars gift card respectively. '
+                                                         'There are other prizes available as well!```', inline=False)
     embed.add_field(name='```How will I submit my project?```',value='```We will open submissions with a platform called '
                                                                'Devpost right before the hackathon ends```',inline=False)
     embed.add_field(name='```How will judging work?```',value='```You\'ll have to present on our Discord server. There will be '
@@ -80,7 +82,7 @@ async def help(ctx):
                                                         'https://docs.google.com/presentation/d/1ptT7K'
                                                         '-pjaS53YSj_GtGqF85uk5RrsbR-UywSpjb2bIM/edit?usp=sharing  ```')
     embed.add_field(name='```I don’t have a team! Help!```',value='```Make sure to ask around on #team-formation! A team '
-                                                            'should be around 3 to 4 students so someone might have '
+                                                            'should be around 3 to 4 students (max of 6) so someone might have '
                                                             'an empty space! Also, reach out to an organizer on the '
                                                             'Discord server.```',inline=False)
     embed.add_field(name='```Commands```', value='```css\nhelp - this command \n'
