@@ -89,7 +89,7 @@ class Teams(commands.Cog):
                                                       speak=False, stream=False,read_message_history=False, connect=False)
             
             team_perms = discord.PermissionOverwrite(read_messages=True, view_channel=True, send_messages=True,
-                                                     speak=True, stream=True, read_message_history=True)
+                                                     speak=True, stream=True, read_message_history=True,connect=True)
             
             embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
             await ctx.send(embed=embed)
