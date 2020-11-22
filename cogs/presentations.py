@@ -50,11 +50,10 @@ class Present(commands.Cog):
         voice_channel = ctx.guild.get_channel(697531358318166166)
         # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
         await ctx.send(voice_channel.members)  # sends a list of members
-        vc_members = voice_channel.members  # this is what mutes
-        for i in vc_members:
-            if exec_role not in i.roles:
-                await i.edit(mute=True)
-                
+        vc_members = voice_channel.members
+        for hackers in vc_members:
+            if exec_role not in hackers.roles:
+                await hackers.edit(mute=True)
         """
         for all_roles in ctx.guild.roles:
             if not all_roles.permissions.change_nickname: # or all_roles == techhacks_role):
