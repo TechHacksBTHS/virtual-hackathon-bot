@@ -20,14 +20,13 @@ class Present(commands.Cog):
         # announcements text channel under IMPORTANT 697528162954903572
         announcments = ctx.guild.get_channel(779380419153363004)
         # techhacks_role = ctx.guild.get_role('TechHacks')
-        exec_role = ctx.guild.get_role('exec')
+        exec_role = ctx.guild.get_role(697528456744796271)
         exec_perms = discord.Permissions.voice()
         # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
         permissions = discord.PermissionOverwrite(speak=False, stream=False)
         presentation_perms = discord.PermissionOverwrite(speak=True, stream=True)
         for all_roles in ctx.guild.roles:
-            if not (all_roles == exec_role or all_roles == role):
-                # or all_roles == techhacks_role):
+            if role != all_roles and not all_roles.permissions.change_nickname :
                 await voice_channel.set_permissions(all_roles, overwrite=permissions)
             else:
                 await voice_channel.set_permissions(all_roles, overwrite=presentation_perms)
