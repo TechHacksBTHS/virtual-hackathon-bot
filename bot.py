@@ -116,10 +116,10 @@ async def on_raw_reaction_add(payload):
     user = guild.get_member(payload.user_id)
     #await channel.send(user)
     #await channel.send(payload.message_id)
-    await channel.send(payload.emoji)
-    await channel.send(Technight2020)
+    #await channel.send(payload.emoji)
+    #await channel.send(Technight2020)
     
-    await user.add_roles(Technight2020)
+    #await user.add_roles(Technight2020)
     if payload.emoji == "😎": #and payload.message_id == message_id:
         await channel.send(Technight2020)
         await user.add_roles(Technight2020)
@@ -133,7 +133,7 @@ async def on_raw_reaction_remove(payload):
     guild = bot.get_guild(payload.guild_id)
     #await channel.send(payload)
     Technight2020 = guild.get_role(779364367145500702)
-    user = bot.get_user(payload.user_id)
+    user = guild.get_member(payload.user_id)
     if payload.emoji == "✋" and payload.message_id == message_id:
         await user.remove_roles(Technight2020)
 
