@@ -27,7 +27,7 @@ class Present(commands.Cog):
                 await i.edit(mute=False)
         await announcments.send(f'Everyone, team {role.mention} is now presenting! Show '
                                 f'some respect and join the '
-                                f'#exec voice channel! ;)')
+                                f'Presentations voice channel! ;)')
         
 
     @commands.command()
