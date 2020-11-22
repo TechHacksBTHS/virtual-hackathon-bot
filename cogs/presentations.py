@@ -49,7 +49,8 @@ class Present(commands.Cog):
         # Presentations voice channel under VOICE CHANNELS 697531358318166166
         voice_channel = ctx.guild.get_channel(697543400596963328)
         # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
-
+        await ctx.send(voice_channel.members)
+        """
         for all_roles in ctx.guild.roles:
             if not all_roles.permissions.change_nickname: # or all_roles == techhacks_role):
                 await ctx.send(all_roles)
@@ -57,7 +58,7 @@ class Present(commands.Cog):
 
         await voice_channel.set_permissions(exec_role, overwrite=exec_perms)
         await ctx.send('All presenters have been muted')
-
+        """
 
 def setup(bot):
     bot.add_cog(Present(bot))
