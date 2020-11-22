@@ -106,29 +106,13 @@ async def ping(ctx):
 async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, id=697533967859187803)
     await member.add_roles(role)
-"""
-@bot.event
-async def on_reaction_add(reaction, user):
-    roleChannelId = 779360821490221067
-    #message_id = 779426797044891688
-    message_id = 779915044732665886
-    print("received ")
-    await reaction.message.channel.send(reaction.message.id)
-    
 
-    if reaction.emoji == "😎": #and reaction.message.id == message_id:
-        #Technight2020 = discord.utils.get(user.server.roles, name="Technight 2020")
-        Technight2020 = reaction.message.guild.get_role(779364367145500702)
-        await user.add_roles(Technight2020)
-"""
 @bot.event
 async def on_raw_reaction_add(payload):
     channel = bot.get_channel(payload.channel_id)
-    #print("reaction added")
-    #await channel.send(payload)
-    message_id = 779915044732665886
+    message_id = 779426797044891688
     Technight2020 = bot.get_role(779364367145500702)
-    if payload.emoji == "😎" and payload.message_id == message_id:
+    if payload.emoji == "✋" and payload.message_id == message_id:
         await user.add_roles(Technight2020)
 
 
