@@ -9,9 +9,7 @@ from discord.utils import get
 # TODO join teams by reacting to message
 
 # STUFF THAT NEEDS TO BE DONE OVER THE WEEKEND
-# TODO stop the bugs with creating a team
 # TODO filter out non-hackathon participants
-# TODO presentation feature needs wayyyy more testing
 
 def unpack(s):
     return "\n".join(map(str, s))
