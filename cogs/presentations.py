@@ -47,7 +47,7 @@ class Present(commands.Cog):
 
         exec_role = ctx.guild.get_role('exec')
         # Presentations voice channel under VOICE CHANNELS 697531358318166166
-        voice_channel = ctx.guild.get_channel(697543400596963328)
+        voice_channel = ctx.guild.get_channel(697531358318166166)
         # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
         await ctx.send(voice_channel.voice_states.keys())
         """
