@@ -78,7 +78,7 @@ async def help(ctx):
                                                                'Devpost right before the hackathon ends```',inline=False)
     embed.add_field(name='```How will judging work?```',value='```You\'ll have to present on our Discord server. There will be '
                                                         'a 5 minute time restriction on presentations, and our rubric '
-                                                        'is avilable at: '
+                                                        'is available at: '
                                                         'https://docs.google.com/presentation/d/1ptT7K'
                                                         '-pjaS53YSj_GtGqF85uk5RrsbR-UywSpjb2bIM/edit?usp=sharing  ```')
     embed.add_field(name='```I don’t have a team! Help!```',value='```Make sure to ask around on #team-formation! A team '
@@ -108,7 +108,7 @@ async def on_member_join(member):
 
 
 @bot.event
-async def on_raw_reaction_add(payload):
+async def on_raw_reaction_add(payload): # We have to use the raw function because on the regular reaction, it only does it for cached messages, which is not ideal
     channel = bot.get_channel(payload.channel_id)
     guild = bot.get_guild(payload.guild_id)
     message_id = 779426797044891688
@@ -119,7 +119,7 @@ async def on_raw_reaction_add(payload):
 
 
 @bot.event
-async def on_raw_reaction_remove(payload):
+async def on_raw_reaction_remove(payload): # Same reasoning as above
     channel = bot.get_channel(payload.channel_id)
     guild = bot.get_guild(payload.guild_id)
     message_id = 779426797044891688
@@ -155,7 +155,7 @@ async def reload(ctx):
 
 
 for filename in os.listdir('./cogs'):
-    if filename.endswith('.py'): # and not filename.startswith('teams'):  #remove second half of and in order to load the teams file
+    if filename.endswith('.py'): # and not filename.startswith('teams'):  #add second half of 'and' in order to lock the teams file
         bot.load_extension(f'cogs.{filename[:-3]}')
 
 bot.run(TOKEN)

@@ -47,7 +47,7 @@ class Teams(commands.Cog):
     @commands.command(hidden=True)
     async def all_teams(self, ctx):
         await self.bot.wait_until_ready()
-        channel = self.bot.get_channel(698146745258999948)
+        channel = self.bot.get_channel(698146745258999948) # join-team channel where it shows all teams
         created_teams = []
         for role in ctx.guild.roles:
             if not role.permissions.change_nickname:
@@ -94,11 +94,11 @@ class Teams(commands.Cog):
                     
             # ------------------------- team channels -------------------------        
             guild = ctx.guild
-            team_cat = guild.get_channel(699729155301834762)
-            team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions)
-            team_vc = await guild.create_voice_channel(role_str,category=team_cat, permissions=permissions)
-            await team_txt.set_permissions(role, overwrite=team_perms)
-            await team_vc.set_permissions(role, overwrite=team_perms)
+            team_cat = guild.get_channel(699729155301834762) #get the Team Chat category
+            team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions) # make a team text channel
+            team_vc = await guild.create_voice_channel(role_str,category=team_cat, permissions=permissions) # make a team voice channel
+            await team_txt.set_permissions(role, overwrite=team_perms) # only give the team access to the tc
+            await team_vc.set_permissions(role, overwrite=team_perms)  # only give the team access to the vc
 
             # update join-teams:
             await self.all_teams(ctx)
@@ -136,30 +136,16 @@ class Teams(commands.Cog):
     @commands.command()
     async def leave(self, ctx):
         await self.bot.wait_until_ready()
-        guild = ctx.guild
-        exec_role = get(guild.roles, name='exec')
-        everyone_role = get(guild.roles, name='@everyone')
-        participant_role = get(guild.roles, name='participant')
         all_roles = ctx.author.roles
         if 'participant' in all_roles:
             await ctx.send(f'Cannot leave particpants {ctx.author.mention}')
-
         else:
-            if (exec_role) in all_roles:
-                all_roles.remove(exec_role)
-            if participant_role in all_roles:
-                all_roles.remove(participant_role)
-
-            all_roles.remove(everyone_role)
-            
-            for i in all_roles:
-                if not i.permissions.change_nickname:
-                    role = i 
-            
+            for i in all_roles: 
+                if not i.permissions.change_nickname: # filters out any role without change nickname permission AKA the team roles
+                    role = i    
             user = ctx.message.author
             try:
                 await user.remove_roles(role)
-
                 particpant = discord.utils.get(ctx.guild.roles, name='participant')
                 await user.add_roles(particpant)
                 col = role.color
@@ -173,7 +159,7 @@ class Teams(commands.Cog):
     async def remove(self, ctx, *, role: commands.clean_content):
         await self.bot.wait_until_ready()
         guild = ctx.guild
-        print(ctx.message.author)
+        #print(ctx.message.author)
         team_txt = discord.utils.get(guild.text_channels, name=role)  # TEAM TEXT CHANNEL
         team_voice = discord.utils.get(guild.voice_channels, name=role)  # TEAM VOICE CHANNEL
         role = discord.utils.get(guild.roles, name=role)
@@ -187,12 +173,12 @@ class Teams(commands.Cog):
                     member = i
                     print(i)
                     await member.add_roles(participant_role)
-
+                # cleanup
                 await team_txt.delete(reason='!removed')
                 await team_voice.delete(reason='!removed')
                 await role.delete()
                 await ctx.send(embed=embed)
-                await self.all_teams(ctx)
+                await self.all_teams(ctx) # refresh the join-teams channel
             except discord.Forbidden:
                 await ctx.send('Sorry boss, that\'s way above my pay grade')
         else:
@@ -203,7 +189,7 @@ class Teams(commands.Cog):
     async def purge(self, ctx):
         await self.bot.wait_until_ready()
         guild = ctx.guild
-        team_cat = guild.get_channel(699729155301834762)
+        team_cat = guild.get_channel(699729155301834762) # get the team chat category
         participant_role = get(guild.roles, name='participant')
         for role in ctx.guild.roles:
             if not role.permissions.change_nickname:
@@ -212,10 +198,10 @@ class Teams(commands.Cog):
                 await role.delete(reason='purged')
         
         for channel in ctx.guild.text_channels:
-            if channel.category == team_cat:
+            if channel.category == team_cat: # remove every tc in team chat category
                 await channel.delete(reason='purged')
         for channel in ctx.guild.voice_channels:
-            if channel.category == team_cat:
+            if channel.category == team_cat: # remove every tc in team chat category
                 await channel.delete(reason='purged')
         await self.all_teams(ctx)
         await ctx.send('All teams removed')

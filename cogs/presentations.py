@@ -20,7 +20,7 @@ class Present(commands.Cog):
         announcments = ctx.guild.get_channel(697528162954903572)
         exec_role = ctx.guild.get_role(697528456744796271)
         vc_members = voice_channel.members 
-        for i in vc_members:
+        for i in vc_members: # go through everyone in vc and mute them UNLESS they are presenting
             if (exec_role not in i.roles) and (role not in i.roles):
                 await i.edit(mute=True)
             else: 
@@ -33,15 +33,11 @@ class Present(commands.Cog):
     @commands.command()
     @commands.has_role('exec')
     async def hush(self, ctx):
-
-        permissions = discord.PermissionOverwrite(speak=False, stream=False)
-        exec_perms = discord.Permissions.voice()
-
         exec_role = ctx.guild.get_role(697528456744796271)
         # Presentations voice channel under VOICE CHANNELS 697531358318166166
         voice_channel = ctx.guild.get_channel(697531358318166166)
         vc_members = voice_channel.members  
-        for i in vc_members:
+        for i in vc_members: # go through everybody in the vc and mute them
             if exec_role not in i.roles:
                 await i.edit(mute=True)
         await ctx.send("Everyone is muted")
