@@ -50,7 +50,7 @@ class Present(commands.Cog):
         voice_channel = ctx.guild.get_channel(697531358318166166)
         # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
         await ctx.send(voice_channel.members)  # sends a list of members
-        await voice_channel.member.edit(mute=True)  # this is what mutes
+        await voice_channel.members.edit(mute=True)  # this is what mutes
         announcments = ctx.guild.get_channel(779380419153363004)
         await announcments.send(f'{voice_channel.member.name} is muted')
         """
