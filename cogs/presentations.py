@@ -14,27 +14,29 @@ class Present(commands.Cog):
 
     @commands.command()
     @commands.has_role('exec')
-    async def present(self, ctx, *,role: discord.Role):
-        voice_channel = ctx.guild.get_channel(697531358318166166)
-        announcments = ctx.guild.get_channel(697528162954903572)
-        #techhacks_role = ctx.guild.get_role('TechHacks')
+    async def present(self, ctx, *, role: discord.Role):
+        # Presentations voice channel under VOICE CHANNELS 697531358318166166
+        voice_channel = ctx.guild.get_channel(697543400596963328)
+        # announcements text channel under IMPORTANT 697528162954903572
+        announcments = ctx.guild.get_channel(779380419153363004)
+        # techhacks_role = ctx.guild.get_role('TechHacks')
         exec_role = ctx.guild.get_role('exec')
         exec_perms = discord.Permissions.voice()
-        #await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
+        # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
         permissions = discord.PermissionOverwrite(speak=False, stream=False)
-        pres_perms = discord.PermissionOverwrite(speak=True, stream=True)
+        presentation_perms = discord.PermissionOverwrite(speak=True, stream=True)
         for all_roles in ctx.guild.roles:
-
-            if not (all_roles == exec_role or all_roles == role): #or all_roles == techhacks_role):
+            if not (all_roles == exec_role or all_roles == role):
+                # or all_roles == techhacks_role):
                 await voice_channel.set_permissions(all_roles, overwrite=permissions)
             else:
-                await voice_channel.set_permissions(all_roles, overwrite=pres_perms)
+                await voice_channel.set_permissions(all_roles, overwrite=presentation_perms)
         await announcments.send(f'everyone, team {role.mention} is now presenting! Show '
                                 f'some respect and join the '
-                                f'#presentations voice channel! ;)')
+                                f'#exec voice channel! ;)')
+        # TODO: change #exec to #presentation
         await voice_channel.set_permissions(exec_role, overwrite=exec_perms)
-        #await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
-
+        # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
 
 
     @commands.command()
@@ -46,16 +48,16 @@ class Present(commands.Cog):
         exec_perms = discord.Permissions.voice()
 
         exec_role = ctx.guild.get_role('exec')
-        voice_channel = ctx.guild.get_channel(697531358318166166)
+        # Presentations voice channel under VOICE CHANNELS 697531358318166166
+        voice_channel = ctx.guild.get_channel(697543400596963328)
         # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
 
         for all_roles in ctx.guild.roles:
-            if not (all_roles == exec_role): # or all_roles == techhacks_role):
+            if not (all_roles == exec_role):  # or all_roles == techhacks_role):
                 await voice_channel.set_permissions(all_roles, overwrite=permissions)
 
         await voice_channel.set_permissions(exec_role, overwrite=exec_perms)
         await ctx.send('All presenters have been muted')
-
 
 
 def setup(bot):
