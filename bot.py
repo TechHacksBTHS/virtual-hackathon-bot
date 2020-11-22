@@ -122,9 +122,10 @@ async def on_raw_reaction_remove(payload):
     channel = bot.get_channel(payload.channel_id)
     # message_id = 779426797044891688
     message_id = 779930304251953152
-    await channel.send(payload)
+    #await channel.send(payload)
     Technight2020 = bot.get_role(779364367145500702)
     if payload.emoji == "✋" and payload.message_id == message_id:
+        print("hi")
         await user.remove_roles(Technight2020)
 
 
