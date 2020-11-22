@@ -111,7 +111,7 @@ async def on_member_join(member):
 async def on_raw_reaction_add(payload):
     channel = bot.get_channel(payload.channel_id)
     guild = bot.get_guild(payload.guild_id)
-    message_id = 779933699651272746
+    message_id = 779953190778961920
     Technight2020 = guild.get_role(779364367145500702)
     user = guild.get_member(payload.user_id)
     #await channel.send(user)
@@ -120,7 +120,7 @@ async def on_raw_reaction_add(payload):
     await channel.send("😎")
     #await channel.send(Technight2020)
     #await user.add_roles(Technight2020)
-    if payload.emoji == "😎": #and payload.message_id == message_id:
+    if payload.message_id == message_id: #and (payload.emoji == "😎"):
         await channel.send(Technight2020)
         await user.add_roles(Technight2020)
 
