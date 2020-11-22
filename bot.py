@@ -113,7 +113,8 @@ async def on_reaction_add(reaction, user):
     #message_id = 779426797044891688
     message_id = 779915044732665886
     #print("received ")
-    #await reaction.message.channel.send("recieved")
+    await reaction.message.channel.send(reaction.message.id)
+    
 
     if reaction.emoji == "😎" and reaction.message.id == message_id:
         #Technight2020 = discord.utils.get(user.server.roles, name="Technight 2020")
