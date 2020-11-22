@@ -26,7 +26,7 @@ class Present(commands.Cog):
         permissions = discord.PermissionOverwrite(speak=False, stream=False)
         presentation_perms = discord.PermissionOverwrite(speak=True, stream=True)
         for all_roles in ctx.guild.roles:
-            if role != all_roles and not all_roles.permissions.change_nickname :
+            if role != all_roles and not all_roles.permissions.change_nickname:
                 await voice_channel.set_permissions(all_roles, overwrite=permissions)
             else:
                 await voice_channel.set_permissions(all_roles, overwrite=presentation_perms)
@@ -49,7 +49,10 @@ class Present(commands.Cog):
         # Presentations voice channel under VOICE CHANNELS 697531358318166166
         voice_channel = ctx.guild.get_channel(697531358318166166)
         # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
-        await ctx.send(voice_channel.members)
+        await ctx.send(voice_channel.members)  # sends a list of members
+        await voice_channel.member.edit(mute=True)  # this is what mutes
+        announcments = ctx.guild.get_channel(779380419153363004)
+        await announcments.send(f'{voice_channel.member.name} is muted')
         """
         for all_roles in ctx.guild.roles:
             if not all_roles.permissions.change_nickname: # or all_roles == techhacks_role):
