@@ -110,7 +110,8 @@ async def on_member_join(member):
 @bot.event
 async def on_reaction_add(reaction, user):
     roleChannelId = 779360821490221067
-    message_id = 779426797044891688
+    #message_id = 779426797044891688
+    message_id = 779915044732665886
    
     if user.reaction.emoji == "✋" and reaction.message.id == message_id:
         #Technight2020 = discord.utils.get(user.server.roles, name="Technight 2020")
