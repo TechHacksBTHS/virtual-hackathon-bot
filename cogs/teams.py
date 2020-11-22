@@ -48,6 +48,7 @@ class Teams(commands.Cog):
     async def all_teams(self, ctx):
         await self.bot.wait_until_ready()
         channel = self.bot.get_channel(698146745258999948) # join-team channel where it shows all teams
+
         created_teams = []
         for role in ctx.guild.roles:
             if not role.permissions.change_nickname:
@@ -61,11 +62,41 @@ class Teams(commands.Cog):
                               color=random.choice(Colors))
         await channel.send(embed=embed)
 
+    """
+    @commands.command
+    async def get_users(self, ctx):
+        channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
+        # role = Technight 2020
+        role = get(ctx.guild.roles, id=779364367145500702)
+        if role is None:
+            await channel.send('No "Technight 2020" role on this server!')
+            return
+        empty = True
+        for member in role:
+            if role in member.roles:
+                await channel.send("{0.name}: {0.id}".format(member))
+                empty = False
+        if empty:
+            await bot.say("Nobody has the role {}".format(role.mention))
+    """
+
+    @commands.command()
+    async def getuser(self, ctx, role: discord.Role):
+        channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
+        # role = Technight 2020
+        role = get(ctx.guild.roles, id=779871854545862717)  # CaffeineOverflow
+        if role is None:
+            await channel.send('No "CaffeineOverflow" role on this server!')
+        for users in role:
+            if role in users.roles:
+                await channel.send("\n".join(map(str, role.members)))
+
+
     @commands.command(name='create')
     @commands.has_role('participant')
     async def create(self, ctx, *, role: commands.clean_content):
         await self.bot.wait_until_ready()
-        particpant = ctx.guild.get_role(697533967859187803)
+        participant = ctx.guild.get_role(697533967859187803)
         role = str(role)
         print(role)
         guild = ctx.guild
@@ -82,17 +113,17 @@ class Teams(commands.Cog):
             user = ctx.message.author
             await user.add_roles(role)
             await role.edit(position=3)
-            await user.remove_roles(particpant)
+            await user.remove_roles(participant)
             permissions = discord.PermissionOverwrite(read_messages=False, view_channel=False, send_messages=False,
                                                       speak=False, stream=False,read_message_history=False, connect=False)
-            
+
             team_perms = discord.PermissionOverwrite(read_messages=True, view_channel=True, send_messages=True,
                                                      speak=True, stream=True, read_message_history=True,connect=True)
-            
+
             embed = discord.Embed(title=f'New Team {role} Created!', description='', color=new_col)
             await ctx.send(embed=embed)
-                    
-            # ------------------------- team channels -------------------------        
+
+            # ------------------------- team channels -------------------------
             guild = ctx.guild
             team_cat = guild.get_channel(699729155301834762) #get the Team Chat category
             team_txt = await guild.create_text_channel(role_str,category=team_cat, permissions=permissions) # make a team text channel
@@ -167,8 +198,7 @@ class Teams(commands.Cog):
         if role:
             try:
                 col = role.color
-                embed = discord.Embed(title="The role {} has been deleted!".format(role.name), description='',
-                                      color=col)
+                embed = discord.Embed(title="The role {} has been deleted!".format(role.name), description='', color=col)
                 for i in role.members:
                     member = i
                     print(i)
@@ -196,7 +226,6 @@ class Teams(commands.Cog):
                 for i in role.members:
                     await i.add_roles(participant_role)
                 await role.delete(reason='purged')
-        
         for channel in ctx.guild.text_channels:
             if channel.category == team_cat: # remove every tc in team chat category
                 await channel.delete(reason='purged')
@@ -210,7 +239,7 @@ class Teams(commands.Cog):
     @commands.command(name='test', hidden=True)
     async def test(self, ctx):
         guild = ctx.guild
-        
+
 
 
 def setup(bot):
