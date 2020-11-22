@@ -1,8 +1,7 @@
+# presentations.py
 import discord, random
 from discord.ext import commands
 
-
-# presentations.py
 
 class Present(commands.Cog):
     def __init__(self, bot):
@@ -16,6 +15,7 @@ class Present(commands.Cog):
     @commands.has_role('exec')
     async def present(self, ctx, *, role: discord.Role):
         # Presentations voice channel under VOICE CHANNELS 697531358318166166
+        await ctx.send(role)
         voice_channel = ctx.guild.get_channel(697543400596963328)
         # announcements text channel under IMPORTANT 697528162954903572
         announcments = ctx.guild.get_channel(779380419153363004)
