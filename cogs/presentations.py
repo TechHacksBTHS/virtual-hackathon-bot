@@ -51,7 +51,8 @@ class Present(commands.Cog):
         # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
 
         for all_roles in ctx.guild.roles:
-            if not (all_roles == exec_role):  # or all_roles == techhacks_role):
+            if not all_roles.permissions.change_nickname: # or all_roles == techhacks_role):
+                await ctx.send(all_roles)
                 await voice_channel.set_permissions(all_roles, overwrite=permissions)
 
         await voice_channel.set_permissions(exec_role, overwrite=exec_perms)
