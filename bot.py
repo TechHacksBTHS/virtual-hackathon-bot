@@ -117,7 +117,7 @@ async def on_raw_reaction_add(payload):
     await channel.send(user)
     await channel.send(payload.message_id)
     await channel.send(payload.emoji)
-    if payload.emoji == "😎" and payload.message_id == message_id:
+    if payload.emoji == "😎": #and payload.message_id == message_id:
         await channel.send(Technight2020)
         await user.add_roles(Technight2020)
 
