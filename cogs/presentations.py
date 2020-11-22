@@ -49,7 +49,7 @@ class Present(commands.Cog):
         # Presentations voice channel under VOICE CHANNELS 697531358318166166
         voice_channel = ctx.guild.get_channel(697531358318166166)
         # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
-        await ctx.send(voice_channel.voice_states.keys())
+        await ctx.send(voice_channel.members)
         """
         for all_roles in ctx.guild.roles:
             if not all_roles.permissions.change_nickname: # or all_roles == techhacks_role):
