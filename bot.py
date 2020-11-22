@@ -94,8 +94,7 @@ async def help(ctx):
 
 @bot.command(name='ping')
 async def ping(ctx):
-    data = {
-        "USER": 'heroku',
+    data = { "USER": 'heroku',
         'TEAM': 'online'}
     result = firebase.post(FIREBASE_NAME + '/Team', data)
     print(result)
@@ -111,7 +110,8 @@ async def on_member_join(member):
 @bot.event
 async def on_raw_reaction_add(payload):
     channel = bot.get_channel(payload.channel_id)
-    message_id = 779426797044891688
+    # message_id = 779426797044891688
+    message_id = 779930304251953152
     Technight2020 = bot.get_role(779364367145500702)
     if payload.emoji == "✋" and payload.message_id == message_id:
         await user.add_roles(Technight2020)
@@ -120,7 +120,8 @@ async def on_raw_reaction_add(payload):
 @bot.event
 async def on_raw_reaction_remove(payload):
     channel = bot.get_channel(payload.channel_id)
-    message_id = 779426797044891688
+    # message_id = 779426797044891688
+    message_id = 779930304251953152
     Technight2020 = bot.get_role(779364367145500702)
     if payload.emoji == "✋" and payload.message_id == message_id:
         await user.remove_roles(Technight2020)
