@@ -17,7 +17,7 @@ class Present(commands.Cog):
         # Presentations voice channel under VOICE CHANNELS 697531358318166166
         voice_channel = ctx.guild.get_channel(697531358318166166)
         # announcements text channel under IMPORTANT 697528162954903572
-        announcments = ctx.guild.get_channel(697528162954903572)
+        announcments = ctx.guild.get_channel(779367976876507147)
         exec_role = ctx.guild.get_role(697528456744796271)
         vc_members = voice_channel.members 
         for i in vc_members: # go through everyone in vc and mute them UNLESS they are presenting
