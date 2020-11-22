@@ -40,7 +40,7 @@ class Present(commands.Cog):
         exec_role = ctx.guild.get_role(697528456744796271)
         # Presentations voice channel under VOICE CHANNELS 697531358318166166
         voice_channel = ctx.guild.get_channel(697531358318166166)
-        vc_members = voice_channel.members  
+        vc_members = voice_channel.members
         for i in vc_members:
             if exec_role not in i.roles:
                 await i.edit(mute=True)
