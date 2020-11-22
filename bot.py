@@ -106,7 +106,7 @@ async def ping(ctx):
 async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, id=697533967859187803)
     await member.add_roles(role)
-
+"""
 @bot.event
 async def on_reaction_add(reaction, user):
     roleChannelId = 779360821490221067
@@ -120,6 +120,11 @@ async def on_reaction_add(reaction, user):
         #Technight2020 = discord.utils.get(user.server.roles, name="Technight 2020")
         Technight2020 = reaction.message.guild.get_role(779364367145500702)
         await user.add_roles(Technight2020)
+"""
+@bot.event
+async def on_raw_reaction_add(payload):
+    channel = bot.get_channel(payload.channel_id)
+    await channel.send(payload)
 
 @bot.command(hidden=True)
 @commands.has_role('exec')
