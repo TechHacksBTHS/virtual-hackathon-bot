@@ -15,8 +15,7 @@ class Present(commands.Cog):
     @commands.has_role('exec')
     async def present(self, ctx, *, role: discord.Role):
         # Presentations voice channel under VOICE CHANNELS 697531358318166166
-        await ctx.send(role)
-        voice_channel = ctx.guild.get_channel(697543400596963328)
+        voice_channel = ctx.guild.get_channel(697531358318166166)
         # announcements text channel under IMPORTANT 697528162954903572
         announcments = ctx.guild.get_channel(779380419153363004)
         # techhacks_role = ctx.guild.get_role('TechHacks')
@@ -25,17 +24,27 @@ class Present(commands.Cog):
         # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
         permissions = discord.PermissionOverwrite(speak=False, stream=False)
         presentation_perms = discord.PermissionOverwrite(speak=True, stream=True)
+        """
         for all_roles in ctx.guild.roles:
             if role != all_roles and not all_roles.permissions.change_nickname:
                 await voice_channel.set_permissions(all_roles, overwrite=permissions)
             else:
                 await voice_channel.set_permissions(all_roles, overwrite=presentation_perms)
+        
+        """
+        # TODO: change #exec to #presentation
+        # await voice_channel.set_permissions(exec_role, overwrite=exec_perms)
+        # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
+        vc_members = voice_channel.members 
+        for i in vc_members:
+            if (exec_role not in i.roles) and (role not in i.roles):
+                await i.edit(mute=True)
+            else: 
+                await i.edit(mute=False)
         await announcments.send(f'Everyone, team {role.mention} is now presenting! Show '
                                 f'some respect and join the '
                                 f'#exec voice channel! ;)')
-        # TODO: change #exec to #presentation
-        await voice_channel.set_permissions(exec_role, overwrite=exec_perms)
-        # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
+        
 
     @commands.command()
     @commands.has_role('exec')
@@ -48,8 +57,8 @@ class Present(commands.Cog):
         # Presentations voice channel under VOICE CHANNELS 697531358318166166
         voice_channel = ctx.guild.get_channel(697531358318166166)
         # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
-        await ctx.send(voice_channel.members)  # sends a list of members
-        vc_members = voice_channel.members  # this is what mutes
+        # await ctx.send(voice_channel.members)  # sends a list of members
+        vc_members = voice_channel.members  
         for i in vc_members:
             if exec_role not in i.roles:
                 await i.edit(mute=True)
