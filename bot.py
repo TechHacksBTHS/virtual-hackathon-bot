@@ -127,6 +127,19 @@ async def on_raw_reaction_add(payload):
     print("reaction added")
     await channel.send(payload)
 
+@bot.event
+async def on_reaction_remove(reaction, user):
+    roleChannelId = 779360821490221067
+    #message_id = 779426797044891688
+    message_id = 779915044732665886
+    print("reaction removed ")
+    await reaction.channel.send("role removed")
+
+    if reaction.emoji == "😎": #and reaction.message.id == message_id:
+        #Technight2020 = discord.utils.get(user.server.roles, name="Technight 2020")
+        Technight2020 = reaction.guild.get_role(779364367145500702)
+        await user.remove_roles(Technight2020)
+
 @bot.command(hidden=True)
 @commands.has_role('exec')
 async def load(ctx):
