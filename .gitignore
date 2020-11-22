@@ -5,3 +5,9 @@ tags.*
 *.pyc
 cogs/cog.py
 secret
+.vscode
+.idea
+.history
+.env
+venv
+cogs/__pycache__
