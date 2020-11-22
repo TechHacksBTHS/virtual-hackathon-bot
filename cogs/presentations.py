@@ -31,19 +31,18 @@ class Present(commands.Cog):
                 await voice_channel.set_permissions(all_roles, overwrite=permissions)
             else:
                 await voice_channel.set_permissions(all_roles, overwrite=presentation_perms)
-        await announcments.send(f'everyone, team {role.mention} is now presenting! Show '
+        await announcments.send(f'Everyone, team {role.mention} is now presenting! Show '
                                 f'some respect and join the '
                                 f'#exec voice channel! ;)')
         # TODO: change #exec to #presentation
         await voice_channel.set_permissions(exec_role, overwrite=exec_perms)
         # await voice_channel.set_permissions(techhacks_role, overwrite=exec_perms)
 
-
     @commands.command()
     @commands.has_role('exec')
     async def hush(self, ctx):
 
-        permissions = discord.PermissionOverwrite(speak=True, stream=True)
+        permissions = discord.PermissionOverwrite(speak=False, stream=False)
         techhacks_role = ctx.guild.get_role('TechHacks')
         exec_perms = discord.Permissions.voice()
 
