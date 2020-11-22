@@ -42,6 +42,17 @@ class Present(commands.Cog):
                 await i.edit(mute=True)
         await ctx.send("Everyone is muted")
 
+    @commands.command()
+    @commands.has_role('exec')
+    async def speak(self, ctx):
+        exec_role = ctx.guild.get_role(697528456744796271)
+        # Presentations voice channel under VOICE CHANNELS 697531358318166166
+        voice_channel = ctx.guild.get_channel(697531358318166166)
+        vc_members = voice_channel.members  
+        for i in vc_members: # go through everybody in the vc and unmute them
+            if exec_role not in i.roles:
+                await i.edit(mute=False)
+        await ctx.send("Everyone is unmuted")
 
 def setup(bot):
     bot.add_cog(Present(bot))
