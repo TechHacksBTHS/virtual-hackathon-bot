@@ -114,9 +114,10 @@ async def on_raw_reaction_add(payload):
     message_id = 779933699651272746
     Technight2020 = guild.get_role(779364367145500702)
     user = bot.get_user(payload.user_id)
-    await channel.send(user)
-    await channel.send(payload.message_id)
+    #await channel.send(user)
+    #await channel.send(payload.message_id)
     await channel.send(payload.emoji)
+    await channel.send(Technight2020)
     if payload.emoji == "😎": #and payload.message_id == message_id:
         await channel.send(Technight2020)
         await user.add_roles(Technight2020)
