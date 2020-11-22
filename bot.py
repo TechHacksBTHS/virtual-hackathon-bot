@@ -124,6 +124,7 @@ async def on_reaction_add(reaction, user):
 @bot.event
 async def on_raw_reaction_add(payload):
     channel = bot.get_channel(payload.channel_id)
+    print("reaction added")
     await channel.send(payload)
 
 @bot.command(hidden=True)
