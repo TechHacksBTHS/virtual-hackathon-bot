@@ -50,10 +50,12 @@ class Teams(commands.Cog):
         channel = self.bot.get_channel(698146745258999948) # join-team channel where it shows all teams
 
         created_teams = []
+        users_in_teams = []
         for role in ctx.guild.roles:
             if not role.permissions.change_nickname:
                 created_teams.append(role)
                 all_created_teams.append(role)
+                users_in_teams.append(self.print_members(ctx, role))
 
         await channel.purge(limit=100)
         if created_teams == []:
@@ -80,14 +82,12 @@ class Teams(commands.Cog):
             await bot.say("Nobody has the role {}".format(role.mention))
     """
 
-    @commands.command(name='getusers')
+    # @commands.command(name='getusers')
     async def print_members(self, ctx, role_name):
-        channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
         role = discord.utils.find(
                 lambda r: r.name == role_name, ctx.guild.roles)
-        for user in ctx.guild.members:
-            if role in user.roles:
-                await channel.send(user)
+        users = [user for user in ctx.guild.members if role in user.roles]
+        await users
 
     @commands.command(name='create')
     @commands.has_role('participant')
