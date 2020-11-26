@@ -87,7 +87,7 @@ class Teams(commands.Cog):
                 lambda r: r.name == role_name, ctx.guild.roles)
         for user in ctx.guild.members:
             if role in user.roles:
-                await channel.send(role, user)
+                await channel.send(user)
 
     @commands.command(name='create')
     @commands.has_role('participant')
