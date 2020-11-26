@@ -80,14 +80,14 @@ class Teams(commands.Cog):
             await bot.say("Nobody has the role {}".format(role.mention))
     """
 
-    @commands.command
-    def print_members(self, ctx, role_name):
+    @commands.command(name='getusers')
+    async def print_members(self, ctx, role_name):
         channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
         role = discord.utils.find(
-            lambda r: r.name == role_name, ctx.guild.roles)
+                lambda r: r.name == role_name, ctx.guild.roles)
         for user in ctx.guild.members:
             if role in user.roles:
-                await channel.send(f"{user}")
+                await channel.send(role, user)
 
     @commands.command(name='create')
     @commands.has_role('participant')
