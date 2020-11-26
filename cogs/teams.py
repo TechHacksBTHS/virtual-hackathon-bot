@@ -80,17 +80,14 @@ class Teams(commands.Cog):
             await bot.say("Nobody has the role {}".format(role.mention))
     """
 
-    @commands.command()
-    async def getuser(self, ctx, role: discord.Role):
+    @commands.command
+    def print_members(self, ctx, role_name):
         channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
-        # role = Technight 2020
-        role = get(ctx.guild.roles, id=779871854545862717)  # CaffeineOverflow
-        if role is None:
-            await channel.send('No "CaffeineOverflow" role on this server!')
-        for users in role:
-            if role in users.roles:
-                await channel.send("\n".join(map(str, role.members)))
-
+        role = discord.utils.find(
+            lambda r: r.name == role_name, ctx.guild.roles)
+        for user in ctx.guild.members:
+            if role in user.roles:
+                await channel.send(f"{user}")
 
     @commands.command(name='create')
     @commands.has_role('participant')
