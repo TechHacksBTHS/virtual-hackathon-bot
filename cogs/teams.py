@@ -87,8 +87,8 @@ class Teams(commands.Cog):
         guild = ctx.guild
         channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
         role = discord.utils.get(guild.roles, name=role)
-        users = [user.name for user in ctx.guild.members if role in user.roles]
-        await channel.send(users)
+        users = [user for user in ctx.guild.members if role in user.roles]
+        await channel.send(unpack(users.discriminator))
 
     @commands.command(name='create')
     @commands.has_role('participant')
