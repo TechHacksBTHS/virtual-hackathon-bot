@@ -67,16 +67,15 @@ class Teams(commands.Cog):
 
     # @commands.command(name='getusers')
     # @commands.has_role('exec')
-    async def print_members(self, ctx, role: discord.Role):
+    def print_members(self, ctx, role: discord.Role):
         """ returns a <LIST> of users in a role """
-        await self.bot.wait_until_ready()
         self.bot.wait_until_ready()
         role = str(role)
         guild = ctx.guild
         # channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
         role = discord.utils.get(guild.roles, name=role)
         users = [user.name for user in ctx.guild.members if role in user.roles]
-        await users
+        return users
 
     @commands.command(name='create')
     @commands.has_role('participant')
