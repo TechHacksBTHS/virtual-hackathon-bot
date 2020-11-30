@@ -83,10 +83,11 @@ class Teams(commands.Cog):
     @commands.has_role('exec')
     async def print_members(self, ctx, *, role: commands.clean_content):
         await self.bot.wait_until_ready()
+        role = str(role)
         guild = ctx.guild
         channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
         role = discord.utils.get(guild.roles, name=role)
-        users = [user for user in ctx.guild.members if role in user.roles]
+        users = [user.name for user in ctx.guild.members if role in user.roles]
         await channel.send(users)
 
     @commands.command(name='create')
@@ -168,9 +169,9 @@ class Teams(commands.Cog):
         if 'participant' in all_roles:
             await ctx.send(f'Cannot leave particpants {ctx.author.mention}')
         else:
-            for i in all_roles: 
+            for i in all_roles:
                 if not i.permissions.change_nickname: # filters out any role without change nickname permission AKA the team roles
-                    role = i    
+                    role = i
             user = ctx.message.author
             try:
                 await user.remove_roles(role)
