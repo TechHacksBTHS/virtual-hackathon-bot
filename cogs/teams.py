@@ -8,9 +8,6 @@ from discord.utils import get
 # TODO change team name
 # TODO join teams by reacting to message
 
-# STUFF THAT NEEDS TO BE DONE OVER THE WEEKEND
-# TODO filter out non-hackathon participants
-
 def unpack(s):
     return "\n".join(map(str, s))
 
@@ -82,12 +79,12 @@ class Teams(commands.Cog):
             await bot.say("Nobody has the role {}".format(role.mention))
     """
 
-    # @commands.command(name='getusers')
+    @commands.command(name='getusers')
     async def print_members(self, ctx, role_name):
-        role = discord.utils.find(
-                lambda r: r.name == role_name, ctx.guild.roles)
+        channel = self.bot.get_channel(779380419153363004)
+        role = discord.utils.find(lambda r: r.name == role_name, ctx.guild.roles)
         users = [user for user in ctx.guild.members if role in user.roles]
-        await users
+        await channel.send(users)
 
     @commands.command(name='create')
     @commands.has_role('participant')
