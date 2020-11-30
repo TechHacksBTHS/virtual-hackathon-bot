@@ -62,22 +62,21 @@ class Teams(commands.Cog):
             created_teams.append('No teams yet, use !create <teamname> to create one!')
         embed = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(created_teams)}',
                               color=random.choice(Colors))
-        await channel.send(embed=embed)
+        # await channel.send(embed=embed)
         await channel2.send(unpack(users_in_teams))
 
     # @commands.command(name='getusers')
     # @commands.has_role('exec')
-    def print_members(self, ctx, role: discord.Role):
+    async def print_members(self, ctx, role: discord.Role):
         """ returns a <LIST> of users in a role """
-        # await self.bot.wait_until_ready()
+        await self.bot.wait_until_ready()
         self.bot.wait_until_ready()
         role = str(role)
         guild = ctx.guild
         # channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
         role = discord.utils.get(guild.roles, name=role)
         users = [user.name for user in ctx.guild.members if role in user.roles]
-        # await channel.send(unpack(users))
-        return users.insert(0, role)
+        await users
 
     @commands.command(name='create')
     @commands.has_role('participant')
