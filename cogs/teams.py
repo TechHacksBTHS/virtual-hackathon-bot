@@ -63,7 +63,12 @@ class Teams(commands.Cog):
         embed = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(created_teams)}',
                               color=random.choice(Colors))
         # await channel.send(embed=embed)
-        await channel2.send(unpack(users_in_teams))
+        embed2 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(unpack(users_in_teams))}',
+                               color=random.choice(Colors))
+        embed3 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(created_teams)+unpack(unpack(users_in_teams))}',
+                               color=random.choice(Colors))
+        await channel2.send(embed=embed2)
+        await channel2.send(embed=embed3)
 
     # @commands.command(name='getusers')
     # @commands.has_role('exec')
@@ -75,7 +80,7 @@ class Teams(commands.Cog):
         # channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
         role = discord.utils.get(guild.roles, name=role)
         users = [user.name for user in ctx.guild.members if role in user.roles]
-        return users
+        return users.insert(0, role)
 
     @commands.command(name='create')
     @commands.has_role('participant')
