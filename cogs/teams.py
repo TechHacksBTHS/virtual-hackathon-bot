@@ -63,7 +63,7 @@ class Teams(commands.Cog):
         embed = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(created_teams)}',
                               color=random.choice(Colors))
         # await channel.send(embed=embed)
-        embed2 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(users_in_teams)}',
+        embed2 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{", ".join(unpack(users_in_teams))}',
                                color=random.choice(Colors))
         await channel2.send(embed=embed2)
 
@@ -77,7 +77,7 @@ class Teams(commands.Cog):
         # channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
         role = discord.utils.get(guild.roles, name=role)
         users = [user.name for user in ctx.guild.members if role in user.roles]
-        return users.insert(0, role)
+        return users
 
     @commands.command(name='create')
     @commands.has_role('participant')
