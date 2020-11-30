@@ -19,16 +19,16 @@ class Present(commands.Cog):
         # announcements text channel under IMPORTANT 697528162954903572
         announcments = ctx.guild.get_channel(779367976876507147)
         exec_role = ctx.guild.get_role(697528456744796271)
-        vc_members = voice_channel.members 
-        for i in vc_members: # go through everyone in vc and mute them UNLESS they are presenting
+        vc_members = voice_channel.members
+        for i in vc_members:  # go through everyone in vc and mute them UNLESS they are presenting
             if (exec_role not in i.roles) and (role not in i.roles):
                 await i.edit(mute=True)
-            else: 
+            else:
                 await i.edit(mute=False)
         await announcments.send(f'Everyone, team {role.mention} is now presenting! Show '
                                 f'some respect and join the '
                                 f'Presentations voice channel! ;)')
-        
+
 
     @commands.command()
     @commands.has_role('exec')
@@ -36,7 +36,7 @@ class Present(commands.Cog):
         exec_role = ctx.guild.get_role(697528456744796271)
         # Presentations voice channel under VOICE CHANNELS 697531358318166166
         voice_channel = ctx.guild.get_channel(697531358318166166)
-        vc_members = voice_channel.members  
+        vc_members = voice_channel.members
         for i in vc_members: # go through everybody in the vc and mute them
             if exec_role not in i.roles:
                 await i.edit(mute=True)
