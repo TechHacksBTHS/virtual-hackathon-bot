@@ -43,8 +43,11 @@ class Teams(commands.Cog):
 
     @commands.command(hidden=True)
     async def all_teams(self, ctx):
+        """ sends an embed msg to #join-team & lists team names and members """
         await self.bot.wait_until_ready()
-        channel = self.bot.get_channel(698146745258999948) # join-team channel where it shows all teams
+        # join-team channel where it shows all teams
+        channel = self.bot.get_channel(698146745258999948)
+        channel2 = self.bot.get_channel(779380419153363004)  # private-bot-cmd
 
         created_teams = []
         users_in_teams = []
@@ -60,35 +63,21 @@ class Teams(commands.Cog):
         embed = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(created_teams)}',
                               color=random.choice(Colors))
         await channel.send(embed=embed)
+        await channel2.send(unpack(users_in_teams))
 
-    """
-    @commands.command
-    async def get_users(self, ctx):
-        channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
-        # role = Technight 2020
-        role = get(ctx.guild.roles, id=779364367145500702)
-        if role is None:
-            await channel.send('No "Technight 2020" role on this server!')
-            return
-        empty = True
-        for member in role:
-            if role in member.roles:
-                await channel.send("{0.name}: {0.id}".format(member))
-                empty = False
-        if empty:
-            await bot.say("Nobody has the role {}".format(role.mention))
-    """
-
-    @commands.command(name='getusers')
-    @commands.has_role('exec')
-    async def print_members(self, ctx, role: discord.Role):
-        await self.bot.wait_until_ready()
+    # @commands.command(name='getusers')
+    # @commands.has_role('exec')
+    def print_members(self, ctx, role: discord.Role):
+        """ returns a <LIST> of users in a role """
+        # await self.bot.wait_until_ready()
+        self.bot.wait_until_ready()
         role = str(role)
         guild = ctx.guild
-        channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
+        # channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
         role = discord.utils.get(guild.roles, name=role)
         users = [user.name for user in ctx.guild.members if role in user.roles]
-        await channel.send(unpack(users))
+        # await channel.send(unpack(users))
+        return users.insert(0, role)
 
     @commands.command(name='create')
     @commands.has_role('participant')
