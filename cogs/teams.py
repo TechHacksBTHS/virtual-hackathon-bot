@@ -72,7 +72,7 @@ class Teams(commands.Cog):
         # await channel.send(embed=embed)
         embed2 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(users_in_teams)}',
                                color=random.choice(Colors))
-        embed3 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{", ".join(users_in_teams)}',
+        embed3 = discord.Embed(title='All Teams, use !join to join one! ', description=f"{', '.join(str(users_in_teams))}",
                                color=random.choice(Colors))
         await channel2.send(embed=embed2)
         await channel2.send(embed=embed3)
