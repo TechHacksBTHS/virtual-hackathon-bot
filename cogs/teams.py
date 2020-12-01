@@ -59,7 +59,7 @@ class Teams(commands.Cog):
 
         # inserts the team name into every list of team members
         x = 0
-        for teamname in unpack(all_created_teams):
+        for teamname in all_created_teams:
             users_in_teams[x].insert(0, teamname)
             x += 1
 
