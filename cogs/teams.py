@@ -60,7 +60,7 @@ class Teams(commands.Cog):
         # inserts the team name into every list of team members
         x = 0
         for teamname in all_created_teams:
-            users_in_teams.insert(x, '**'+teamname.name+'**\n')
+            users_in_teams.insert(x, '**'+teamname.name+'**')
             x += 1
 
         # users_in_teams = [ [! !], [Redid, Hisd], [...] ]
