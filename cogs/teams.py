@@ -59,7 +59,7 @@ class Teams(commands.Cog):
 
         # inserts the team name into every list of team members
         x = 0
-        for teamname in all_created_teams:
+        for teamname in unpack(all_created_teams):
             users_in_teams[x].insert(0, teamname)
             x += 1
 
@@ -70,7 +70,7 @@ class Teams(commands.Cog):
         # embed = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(created_teams)}',
         #                       color=random.choice(Colors))
         # await channel.send(embed=embed)
-        embed2 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(users_in_teams)}',
+        embed2 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{str(unpack(users_in_teams))[1:-1]}',
                                color=random.choice(Colors))
         await channel2.send(embed=embed2)
 
