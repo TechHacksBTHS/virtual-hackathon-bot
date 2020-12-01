@@ -63,7 +63,6 @@ class Teams(commands.Cog):
             users_in_teams.insert(x, '**'+teamname.name+'**')
             x += 2
 
-        users_in_teams = unpack(users_in_teams)
         # users_in_teams = [ [! !], [Redid, Hisd], [...] ]
         await channel.purge(limit=100)
         if created_teams == []:
@@ -71,7 +70,7 @@ class Teams(commands.Cog):
         # embed = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(created_teams)}',
                               # color=random.choice(Colors))
         # await channel.send(embed=embed)
-        embed2 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{", ".join(map(str, unpack(users_in_teams)))}',
+        embed2 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{", ".join([", ".join(map(str, team)) for team in users_in_teams])}',
                                color=random.choice(Colors))
         await channel2.send(embed=embed2)
 
