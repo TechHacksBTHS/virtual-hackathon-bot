@@ -64,7 +64,7 @@ class Teams(commands.Cog):
             x += 2
 
         # users_in_teams = [ [! !], [Redid, Hisd], [...] ]
-        users_in_teams = ', '.join([', '.join(map(str, team)) for team in users_in_teams])
+        users_in_teams = ', '.join(map(str, [', '.join(map(str, team)) for team in users_in_teams]))
         await channel.purge(limit=100)
         if created_teams == []:
             created_teams.append('No teams yet, use !create <teamname> to create one!')
