@@ -61,7 +61,7 @@ class Teams(commands.Cog):
         x = 0
         for teamname in all_created_teams:
             users_in_teams.insert(x, '**'+teamname.name+'**')
-            x += 1
+            x += 2
 
         # users_in_teams = [ [! !], [Redid, Hisd], [...] ]
         await channel.purge(limit=100)
