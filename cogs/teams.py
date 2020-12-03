@@ -55,7 +55,7 @@ class Teams(commands.Cog):
             if not role.permissions.change_nickname:
                 created_teams.append(role)
                 all_created_teams.append(role)
-                users_in_teams.append('*'+self.print_members(ctx, role)+'*')
+                users_in_teams.append(self.print_members(ctx, role))
 
         # inserts the team name into every list of team members
         x = 0
@@ -64,17 +64,17 @@ class Teams(commands.Cog):
             x += 2
 
         # users_in_teams = [ [! !], [Redid, Hisd], [...] ]
-        users_in_teams = ', '.join([', '.join(map(str, team)) for team in users_in_teams])
+        users_in_teams = ', '.join(map(str, [', '.join(map(str, team)) for team in users_in_teams]))
         await channel.purge(limit=100)
         if created_teams == []:
             created_teams.append('No teams yet, use !create <teamname> to create one!')
         # embed = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(created_teams)}',
-                              # color=random.choice(Colors))
+        #                     color=random.choice(Colors))
         # await channel.send(embed=embed)
-        # embed2 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(users_in_teams)}',
-        #                        color=random.choice(Colors))
-        await channel2.send(users_in_teams)
-        # await channel2.send(embed=embed2)
+        embed2 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{users_in_teams}',
+                               color=random.choice(Colors))
+        # await channel2.send(users_in_teams)
+        await channel2.send(embed=embed2)
 
     # @commands.command(name='getusers')
     # @commands.has_role('exec')
