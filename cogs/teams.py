@@ -57,22 +57,19 @@ class Teams(commands.Cog):
                 all_created_teams.append(role)
                 users_in_teams.append(self.print_members(ctx, role))
 
-        # inserts the team name after each teammember list spaced 2 elements
-        # apart.
+        # inserts the team name after each teammember list spaced 2 elements apart.
         x = 0
         for teamname in all_created_teams:
             users_in_teams.insert(x, '**'+teamname.name+'**')
             x += 2
 
-        # users_in_teams = [ [! !], [Redid, Hisd], [...] ]
-        # users_in_teams = unpack([', '.join(map(str, team)) for team in users_in_teams if not team.startswith('*')])
-        alt_teams = []
+        teams = []
         for team in users_in_teams:
             if isinstance(team, list):
                 team = ', '.join(map(str, team))
-                alt_teams.append(team)
+                teams.append(team)
             else:
-                alt_teams.append(team)
+                teams.append(team)
 
         await channel.purge(limit=100)
         if created_teams == []:
@@ -80,7 +77,7 @@ class Teams(commands.Cog):
         # embed = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(created_teams)}',
         #                     color=random.choice(Colors))
         # await channel.send(embed=embed)
-        embed2 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(alt_teams)}',
+        embed2 = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(teams)}',
                                color=random.choice(Colors))
         # await channel2.send(users_in_teams)
         await channel2.send(embed=embed2)
@@ -94,7 +91,7 @@ class Teams(commands.Cog):
         guild = ctx.guild
         # channel = self.bot.get_channel(779380419153363004)  # private-bot-cmd
         role = discord.utils.get(guild.roles, name=role)
-        users = [user.name for user in ctx.guild.members if role in user.roles]
+        users = [user.display_name for user in ctx.guild.members if role in user.roles]
         return users
 
     @commands.command(name='create')
