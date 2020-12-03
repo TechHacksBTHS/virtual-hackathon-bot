@@ -57,14 +57,23 @@ class Teams(commands.Cog):
                 all_created_teams.append(role)
                 users_in_teams.append(self.print_members(ctx, role))
 
-        # inserts the team name into every list of team members
+        # inserts the team name after each teammember list spaced 2 elements
+        # apart.
         x = 0
         for teamname in all_created_teams:
             users_in_teams.insert(x, '**'+teamname.name+'**')
             x += 2
 
         # users_in_teams = [ [! !], [Redid, Hisd], [...] ]
-        users_in_teams = [', '.join(map(str, team)) for team in users_in_teams[1::2]]
+        # users_in_teams = unpack([', '.join(map(str, team)) for team in users_in_teams if not team.startswith('*')])
+        alt_teams = []
+        for team in users_in_teams:
+            if isinstance(team, list):
+                team = ', '.join(map(str, team))
+                alt_teams.append(team)
+            else:
+                alt_teams.append(team)
+
         await channel.purge(limit=100)
         if created_teams == []:
             created_teams.append('No teams yet, use !create <teamname> to create one!')
