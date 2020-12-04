@@ -73,7 +73,7 @@ class Teams(commands.Cog):
         teams = []
         for team in users_in_teams:
             if isinstance(team, list):
-                team = '┣━━━┫'.join(map(str, team))
+                team = ',  '.join(map(str, team))
                 teams.append(team)
             else:
                 teams.append(team)
