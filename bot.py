@@ -19,6 +19,7 @@ firebase = firebase.FirebaseApplication(FIREBASE, None)
 
 bot.remove_command('help')
 
+
 @bot.event
 async def on_ready():
     bot_channel = bot.get_channel(779380419153363004)
@@ -152,6 +153,7 @@ async def reload(ctx):
         if filename.endswith('.py'):
             bot.unload_extension(f'cogs.{filename[:-3]}')
             bot.load_extension(f'cogs.{filename[:-3]}')
+    await ctx.send('I have been professionally reloaded')
 
 
 for filename in os.listdir('./cogs'):
