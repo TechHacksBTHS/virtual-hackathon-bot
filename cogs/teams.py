@@ -1,16 +1,17 @@
-""" teams.py - allows for the creation, removal, purging and """
+""" teams.py - Allows for the creation, removal, leaving, and purging of teams
+"""
+
 import random
 import discord
 from discord.ext import commands
 from discord.utils import get
 
 
-# DONE display all users in a team
 # TODO change team name
 # TODO join teams by reacting to message
 
 def unpack(lst):
-    """ joins a newline character after each element in list: s """
+    """ Joins a newline character after each element in list """
     return "\n".join(map(str, lst))
 
 
@@ -36,19 +37,18 @@ Colors = [discord.Color.default(),
 
 
 class Teams(commands.Cog):
-    """ This is the Teams class that handles all
-    actions listed in module doc string """
+    """ Handles functions listed in module doc string """
     def __init__(self, bot):
         self.bot = bot
 
     @commands.Cog.listener()
     async def on_ready(self):
-        """ sends ready message in stdout """
+        """ Sends ready message in stdout """
         print('teams.py is active')
 
     @commands.command(hidden=True)
     async def all_teams(self, ctx):
-        """ sends an embed msg to #join-team & lists team names and team
+        """ Sends an embed msg to #join-team & lists team names and team
         members """
         await self.bot.wait_until_ready()
         # join-team channel where it shows all teams
@@ -70,6 +70,7 @@ class Teams(commands.Cog):
             users_in_teams.insert(iterator, '**'+teamname.name+'**')
             iterator += 2
 
+        # flattens team[] by appending a comma after each teammember
         teams = []
         for team in users_in_teams:
             if isinstance(team, list):
@@ -80,16 +81,14 @@ class Teams(commands.Cog):
 
         await channel.purge(limit=100)
         if created_teams == []:
-            created_teams.append('No teams yet, use !create <teamname> to create one!')
-        # embed = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(created_teams)}',
-        #                     color=random.choice(Colors))
-        # await channel.send(embed=embed)
-        embed = discord.Embed(title='All Teams, use !join to join one! ', description=f'{unpack(teams)}',
+            teams.append('No teams yet, use !create <teamname> to create one!')
+        embed = discord.Embed(title='All Teams, use !join to join one! ',
+                              description=f'{unpack(teams)}',
                               color=random.choice(Colors))
         await channel2.send(embed=embed)
 
     def print_members(self, ctx, role: discord.Role):
-        """ returns a <LIST> of users in a role """
+        """ Returns a list of users in a role """
         self.bot.wait_until_ready()
         role = str(role)
         role = discord.utils.get(ctx.guild.roles, name=role)
@@ -100,7 +99,7 @@ class Teams(commands.Cog):
     @commands.command(name='create')
     @commands.has_role('participant')
     async def create(self, ctx, *, role: commands.clean_content):
-        """ creates a team with name teamname """
+        """ Creates a team with name teamname """
         await self.bot.wait_until_ready()
         guild = ctx.guild
         participant = guild.get_role(697533967859187803)
@@ -108,14 +107,18 @@ class Teams(commands.Cog):
         print(role)
         if ('@' in role) or ('#' in role) or ('http' in role) or ('.' in role):
             await ctx.send(
-                f'That is an illegal name, names cannot include \'.\', \'@\',\'#\' or \'http\'. Capishe {ctx.author.mention}?')
+                f'That is an illegal name, names cannot include '
+                f'\'.\',\'@\',\'#\' or \'http\'. Capishe '
+                f'{ctx.author.mention}?')
             return
         elif get(guild.roles, name=role) in guild.roles:
-            await ctx.send(f'Team {role} already exists, pick a new name or do !join to join them!')
+            await ctx.send(f'Team {role} already exists, pick a new name or do'
+                           f'!join to join them!')
         else:
             new_col = random.choice(Colors)
             role_str = role
-            role = await guild.create_role(name=role, color=new_col, hoist=True)
+            role = await guild.create_role(name=role, color=new_col,
+                                           hoist=True)
             user = ctx.message.author
             await user.add_roles(role)
             await role.edit(position=3)
@@ -161,7 +164,7 @@ class Teams(commands.Cog):
 
     @commands.command()
     async def join(self, ctx, *, role: commands.clean_content):
-        """ join a team with name teamname """
+        """ Join a team with name teamname """
         await self.bot.wait_until_ready()
         role = str(role)
         user = ctx.message.author
@@ -193,7 +196,7 @@ class Teams(commands.Cog):
 
     @commands.command()
     async def leave(self, ctx):
-        """ leaves your current teams """
+        """ Leaves your current teams """
         await self.bot.wait_until_ready()
         all_roles = ctx.author.roles
         guild = ctx.guild
@@ -220,7 +223,7 @@ class Teams(commands.Cog):
     @commands.command()
     @commands.has_role('exec')
     async def remove(self, ctx, *, role: commands.clean_content):
-        """ [exec only] deletes team role from discord """
+        """ Deletes team role from discord """
         await self.bot.wait_until_ready()
         guild = ctx.guild
         # print(ctx.message.author)
@@ -233,7 +236,8 @@ class Teams(commands.Cog):
         if role:
             try:
                 col = role.color
-                embed = discord.Embed(title="The role {} has been deleted!".format(role.name), description='', color=col)
+                msg = "The role {} has been deleted!".format(role.name)
+                embed = discord.Embed(title=msg, description='', color=col)
                 for i in role.members:
                     member = i
                     print(i)
@@ -252,7 +256,7 @@ class Teams(commands.Cog):
     @commands.command()
     @commands.has_role('exec')
     async def purge(self, ctx):
-        """ [exec only] deletes all teams created """
+        """ Deletes all teams created """
         await self.bot.wait_until_ready()
         guild = ctx.guild
         # get the team chat category
@@ -277,10 +281,10 @@ class Teams(commands.Cog):
 
     @commands.command(name='test', hidden=True)
     async def test(self, ctx):
-        """ test to see if this bot recognizes the guild """
+        """ Test function """
         guild = ctx.guild
 
 
 def setup(bot):
-    """ relays to bot.py to load this cog """
+    """ Relays to bot.py to load this cog """
     bot.add_cog(Teams(bot))

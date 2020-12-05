@@ -3,7 +3,7 @@
 cd "$(dirname "$0")"
 echo -ne '▌                          ▐ (0%)\r\c'
 sleep 1
-git commit -am 'autosave'
+git commit -a
 echo -ne '██████████                 ▐ (33%)\r\c'
 sleep 1
 git push origin master
