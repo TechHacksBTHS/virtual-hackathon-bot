@@ -1,5 +1,6 @@
-# bot.py
-# this project was designed by Daniel Kogan, who can be reached at daniel@techhacks.nyc, or dkogan7191@bths.edu
+""" bot.py - handles user interface and loads cogs """
+# This project was designed by Daniel Kogan, who can be reached at
+# daniel@techhacks.nyc, or dkogan7191@bths.edu
 
 import os
 from firebase import firebase
@@ -18,6 +19,7 @@ FIREBASE_NAME = os.environ.get('FIREBASE_NAME', 3)
 firebase = firebase.FirebaseApplication(FIREBASE, None)
 
 bot.remove_command('help')
+
 
 @bot.event
 async def on_ready():
@@ -108,7 +110,9 @@ async def on_member_join(member):
 
 
 @bot.event
-async def on_raw_reaction_add(payload): # We have to use the raw function because on the regular reaction, it only does it for cached messages, which is not ideal
+async def on_raw_reaction_add(payload):
+    # NOTE: We have to use the raw function because on the regular reaction, it
+    #       only does it for cached messages, which is not ideal
     channel = bot.get_channel(payload.channel_id)
     guild = bot.get_guild(payload.guild_id)
     message_id = 779426797044891688
@@ -119,7 +123,9 @@ async def on_raw_reaction_add(payload): # We have to use the raw function becaus
 
 
 @bot.event
-async def on_raw_reaction_remove(payload): # Same reasoning as above
+async def on_raw_reaction_remove(payload):
+    # NOTE: We have to use the raw function because on the regular reaction, it
+    #       only does it for cached messages, which is not ideal
     channel = bot.get_channel(payload.channel_id)
     guild = bot.get_guild(payload.guild_id)
     message_id = 779426797044891688
@@ -152,6 +158,7 @@ async def reload(ctx):
         if filename.endswith('.py'):
             bot.unload_extension(f'cogs.{filename[:-3]}')
             bot.load_extension(f'cogs.{filename[:-3]}')
+    await ctx.send('I have been professionally reloaded')
 
 
 for filename in os.listdir('./cogs'):
