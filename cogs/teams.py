@@ -85,7 +85,7 @@ class Teams(commands.Cog):
         embed = discord.Embed(title='All Teams, use !join to join one! ',
                               description=f'{unpack(teams)}',
                               color=random.choice(Colors))
-        await channel2.send(embed=embed)
+        await channel.send(embed=embed)
 
     def print_members(self, ctx, role: discord.Role):
         """ Returns a list of users in a role """
