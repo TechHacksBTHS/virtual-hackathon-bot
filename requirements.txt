@@ -20,7 +20,7 @@ google-cloud-storage==1.27.0
 google-resumable-media==0.5.0
 googleapis-common-protos==1.51.0
 grpcio==1.28.1
-httplib2==0.18.0
+httplib2==0.19.0
 idna==2.9
 git+https://github.com/Rapptz/discord.py
 msgpack==1.0.0
