@@ -34,7 +34,7 @@ python-dotenv==0.12.0
 python-firebase==1.2
 pytz==2019.3
 requests==2.23.0
-rsa==4.0
+rsa==4.1
 six==1.14.0
 uritemplate==3.0.1
 urllib3==1.25.8
