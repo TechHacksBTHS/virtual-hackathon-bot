@@ -122,7 +122,7 @@ async def on_raw_reaction_add(payload):
     user = guild.get_member(payload.user_id)
     if (payload.message_id == message_id) and (payload.emoji.name == "✋"):
         await user.add_roles(Technight2020)
-    if (payload.message_id == ping_message_id) and (payload.emoji.name=="💃🏻"):
+    if (payload.message_id == ping_message_id) and (payload.emoji.name=="💃"):
         await user.add_roles(announcement_role)
 
 
@@ -139,7 +139,7 @@ async def on_raw_reaction_remove(payload):
     user = guild.get_member(payload.user_id)
     if (payload.message_id == message_id) and (payload.emoji.name == "✋"):
         await user.remove_roles(Technight2020)
-    if (payload.message_id == ping_message_id) and (payload.emoji.name=="💃🏻"):
+    if (payload.message_id == ping_message_id) and (payload.emoji.name=="💃"):
         await user.remove_roles(announcement_role)
 
 
