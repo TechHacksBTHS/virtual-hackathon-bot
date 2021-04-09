@@ -7,8 +7,8 @@ from discord.ext import commands
 from discord.utils import get
 
 
-# TODO change team name
-# TODO join teams by reacting to message
+# TODO ability to change team name
+# TODO ability to join teams by reacting to message
 
 def unpack(lst):
     """ Joins a newline character after each element in list """
@@ -85,7 +85,7 @@ class Teams(commands.Cog):
         embed = discord.Embed(title='All Teams, use !join to join one! ',
                               description=f'{unpack(teams)}',
                               color=random.choice(Colors))
-        await channel2.send(embed=embed)
+        await channel.send(embed=embed)
 
     def print_members(self, ctx, role: discord.Role):
         """ Returns a list of users in a role """
