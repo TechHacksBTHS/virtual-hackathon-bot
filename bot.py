@@ -1,6 +1,6 @@
 """ bot.py - handles user interface and loads cogs """
 # This project was designed by Daniel Kogan, who can be reached at
-# daniel@techhacks.nyc, or dkogan7191@bths.edu
+# daniel@techhacks.nyc, or daniel.kogan@stonybrook.edu
 
 import os
 from firebase import firebase
