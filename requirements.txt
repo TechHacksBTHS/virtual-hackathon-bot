@@ -46,7 +46,7 @@ django-mobile==0.7.0
 django-recaptcha==2.0.5
 django-sortedm2m==2.0.0
 django-tastypie==0.13.3
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 dnspython==1.16.0
 docutils==0.15.2
 easy-thumbnails==2.6
