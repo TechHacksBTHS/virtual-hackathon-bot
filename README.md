@@ -6,7 +6,7 @@ The TechHacks discord bot, hosted on our server for virtual hackathons at https:
 
 ## Hackathon Commands
 
-### create <teamname>
+### Create <teamname>
   
 Creates a team with name teamname
   
