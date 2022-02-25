@@ -1,28 +1,49 @@
-# virtual-hackathon-bot
+# TechHacks Discord Bot
 The TechHacks discord bot, hosted on our server for virtual hackathons at https://discord.gg/Du3J2yh
 
-# Custom Commands
+## Hackathon Commands
 
-!create teamname --> creates a team with name teamname
+### create <teamname>
+  
+Creates a team with name teamname
+  
+### join <teamname>
+  
+Joins a team with name teamname
 
-!join teamname --> joins a team with name teamname
+### leave
 
-!leave --> leaves your current teams
+Leaves your current team
 
-!remove team --> deletes team
+### remove team
+  
+Deletes team
 
-!purge --> deletes all teams
+## Host Commands
+ 
+### Purge 
 
-!present @team --> allows people in team @team to share screens and speak in the #presentations channel
+Deletes all teams
 
-!hush --> removes all streaming and speaking permissions in #presentations
+### Present @team 
+
+allows people in team @team to share screens and speak in the presentations voice channel
+
+### Hush 
+removes all streaming and speaking permissions in the presentations voice channel
 
 
-# Basic Commands
+## Basic Commands
+  
 
+### Kick <@user>
+  
+Kicks user from the server
 
-!kick @user
+### Ban <@user>
+  
+Bans user from the server
 
-!ban @user
-
-!unban @user
+### Unban <@user>
+  
+Unbans user from the server
