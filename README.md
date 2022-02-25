@@ -7,19 +7,23 @@ The TechHacks discord bot, hosted on our server for virtual hackathons at https:
   
 Creates a team with name teamname
   
-### join <teamname>
+### Join <teamname>
   
 Joins a team with name teamname
 
-### leave
+### Leave
 
 Leaves your current team
 
-### remove team
-  
-Deletes team
 
 ## Host Commands
+  
+Subsection of commands reserved for hackathon organizers. Checks privileges to only allow admins to run these commands.
+  
+### Remove team
+  
+Deletes team. 
+
  
 ### Purge 
 
